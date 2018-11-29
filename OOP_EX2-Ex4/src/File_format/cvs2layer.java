@@ -38,15 +38,16 @@ public class cvs2layer {
             
             Point3D geom = new Point3D(lat, lon, alt);
             
-            DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime dateTime = LocalDateTime.parse(time, parseFormatter);
-            long UTC = dateTime.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
+//            DateTimeFormatter parseFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//            LocalDateTime dateTime = LocalDateTime.parse(time, parseFormatter);
+//            long UTC = dateTime.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
             
             double[] orientations = myCoords.azimuth_elevation_dist(geom ,new Point3D(0,0,0));
             Point3D orientation = new Point3D(orientations[0], orientations[1], orientations[2]);
             
-            Meta_data data = new metaData(UTC, orientation);
+            Meta_data data = new metaData(123, orientation);
             
+//            GIS_element element = new GISelement(geom, data, name);
             GIS_element element = new GISelement(geom, data, name);
             Layer.add(element);
         }

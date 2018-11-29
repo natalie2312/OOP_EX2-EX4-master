@@ -1,5 +1,6 @@
 package GIS;
 
+import Coords.MyCoords;
 import Geom.Geom_element;
 import Geom.Point3D;
 
@@ -31,8 +32,9 @@ public class GISelement implements GIS_element {
 	}
 
 	@Override
-	public void translate(Point3D vec) {     // להשלים
-		
+	public void translate(Point3D vec) { 
+        MyCoords myCoords = new MyCoords();
+        this.geom= myCoords.add((Point3D)this.geom, vec);
 	}
 
 }
