@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.GIS_project;
 import GIS.GISproject;
@@ -19,7 +18,7 @@ import GIS.GISproject;
 public class MultiCSV {
 	// File object 
 
-	public static void dir2kml(String name) 
+	public static GIS_project dir2kml(String name) 
 	{ 
 		File maindir = new File(name); 
 		ArrayList <File> csv_files= new ArrayList<File>();	
@@ -37,10 +36,11 @@ public class MultiCSV {
 		
 		project2kml(project);
 		
+		return project;
 	}
 
 
-	public static ArrayList findCSVs(File maindir, ArrayList csv_files)
+	public static ArrayList<File> findCSVs(File maindir, ArrayList<File> csv_files)
 	{
 		File[] filesInDir = maindir.listFiles();
 		for(int i=0; i<filesInDir.length ; i++)
@@ -73,11 +73,11 @@ public class MultiCSV {
 
 			return Arrays.equals(format, csvFormat);
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		return false;

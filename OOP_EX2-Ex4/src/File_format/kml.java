@@ -1,8 +1,10 @@
 package File_format;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import GIS.GIS_element;
 import GIS.GIS_layer;
 import Geom.Point3D;
@@ -49,7 +51,11 @@ public class kml {
 
 		pw.println("<Placemark>");
 		pw.println("<name>"+ element.getName()+ "</name>");
-		pw.println("<description> Date: <b>"+ element+ "</b></description>");
+		
+		Date date = new Date(element.getData().getUTC());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+		pw.println("<description><![CDATA[Timestamp: <b>"+ element.getData().getUTC()+ "</b><br/>Date: <b>"+ df.format(date)+ "</b>]]></description>");
 		pw.println("<styleUrl>#red</styleUrl>");
 		pw.println("<Point>");
 		pw.println("<coordinates>"+ point.y() +","+ point.x()+ ","+ point.z()+ "</coordinates>");

@@ -4,11 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import GIS.GIS_element;
 import GIS.GIS_layer;
-import GIS.GISelement;
-import GIS.GISlayer;
-import Geom.Point3D;
 
 public class Csv2kml {
 	
