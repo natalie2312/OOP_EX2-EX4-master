@@ -26,8 +26,8 @@ public class Csv2kml {
 		}
 
 		kml.startWrite(pw);		
-		
-		kml.addLayer(pw, layer);
+		String defultColor= "red";
+		kml.addLayer(pw, layer,defultColor);
 		kml.closeKml(pw);
 		
 	}

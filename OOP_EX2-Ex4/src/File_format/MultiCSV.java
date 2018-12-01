@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Random;
 
 import GIS.GIS_layer;
 import GIS.GIS_project;
@@ -102,10 +103,26 @@ public class MultiCSV {
 		Iterator<GIS_layer> it= project.iterator();	
 		while(it.hasNext()) {
 			GIS_layer layer= it.next();
-			kml.addLayer(pw, layer);
+			
+			kml.addLayer(pw, layer,getRandomColor());
 		}
 		
 		kml.closeKml(pw);
 	}
 	
+	public static String getRandomColor() {
+		int choise = new Random().nextInt(3); 
+		String color = "red";
+switch(choise) {
+		case 0 : color = "red";
+		break;
+		case 1 : color = "green";
+		break;
+		case 2 : color = "yellow";
+		break;
+		
+		
+	}
+return color;
+}
 }

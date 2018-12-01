@@ -22,26 +22,26 @@ public class kml {
 		pw.print("<Document><Style id=");
 		pw.print("\"red\"");
 		pw.print("><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href></Icon></IconStyle></Style><Style id=" );
-		pw.print("\"yello\"");		
+		pw.print("\"yellow\"");		
 		pw.print("><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon></IconStyle></Style><Style id=" );
 		pw.print("\"green\"");		
 		pw.print("><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon></IconStyle></Style>" );
 		pw.print("<Folder>");
-		pw.print("<name>blabla</name>");
+		pw.print("<name>FOLDER</name>");
 
 	}
 	
-	public static void addLayer(PrintWriter pw, GIS_layer layer) {
+	public static void addLayer(PrintWriter pw, GIS_layer layer, String color) {
 		
 		Iterator<GIS_element> it= layer.iterator();		
 		while(it.hasNext()) 
 		{
 			GIS_element element= it.next();
-			addElement(pw, element);
+			addElement(pw, element,color);
 		}
 		
 	}
-	public static void addElement(PrintWriter pw, GIS_element element) {
+	public static void addElement(PrintWriter pw, GIS_element element,String color) {
 		
 		//בתוך לולאה שקוראת קבצים
 
@@ -56,7 +56,7 @@ public class kml {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
 		pw.println("<description><![CDATA[Timestamp: <b>"+ element.getData().getUTC()+ "</b><br/>Date: <b>"+ df.format(date)+ "</b>]]></description>");
-		pw.println("<styleUrl>#red</styleUrl>");
+		pw.println("<styleUrl>#"+color+"</styleUrl>");
 		pw.println("<Point>");
 		pw.println("<coordinates>"+ point.y() +","+ point.x()+ ","+ point.z()+ "</coordinates>");
 		pw.println("</Point>");
