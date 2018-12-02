@@ -19,6 +19,11 @@ import GIS.GISproject;
 public class MultiCSV {
 	// File object 
 
+	/**
+	 *this function creats a project and then send to function to create one kml file to all the project
+	 * @param name
+	 * @return the 
+	 */
 	public static GIS_project dir2kml(String name) 
 	{ 
 		File maindir = new File(name); 
@@ -40,7 +45,12 @@ public class MultiCSV {
 		return project;
 	}
 
-
+/**
+ * this function gets a path to directory and Recursively passes all folders and files in it to find the csv files 
+ * @param maindir - a path to the directory
+ * @param csv_files - arraylist to store csv files
+ * @return
+ */
 	public static ArrayList<File> findCSVs(File maindir, ArrayList<File> csv_files)
 	{
 		File[] filesInDir = maindir.listFiles();
@@ -61,7 +71,11 @@ public class MultiCSV {
 		return csv_files;
 	}
 
-
+/**
+ * this function gets a csv file and checks whether the format is appropriate
+ * @param file 
+ * @return true if the format appropriate
+ */
 	public static boolean isRightFormat(File file) {
 		String line = "";
 		String[] csvFormat = {"MAC","SSID","AuthMode","FirstSeen","Channel","RSSI","CurrentLatitude","CurrentLongitude","AltitudeMeters","AccuracyMeters","Type"};
@@ -84,7 +98,10 @@ public class MultiCSV {
 		return false;
 	}
 
-
+/**
+ * this function creats kml file ( and the layer to kml.
+ * @param project
+ */
 	public static void project2kml(GIS_project project) {
 
 		PrintWriter pw = null;
@@ -98,18 +115,23 @@ public class MultiCSV {
 			return;
 		}
 
-		kml.startWrite(pw);
+		kml.startWrite(pw);//
 
-		Iterator<GIS_layer> it= project.iterator();	
+		Iterator<GIS_layer> it= project.iterator();//creates layers from each csv file	
 		while(it.hasNext()) {
 			GIS_layer layer= it.next();
 
-			kml.addLayer(pw, layer,getRandomColor());
+			kml.addLayer(pw, layer,getRandomColor()); //each layer sends to create KML file
 		}
 
 		kml.closeKml(pw);
 	}
 
+	/**
+	 * The function randomly selects the color from the three colors set to KML
+	 * 	
+	 * @return String with the color that chosen
+	 */
 	public static String getRandomColor() {
 		
 		int choise = new Random().nextInt(3); 
