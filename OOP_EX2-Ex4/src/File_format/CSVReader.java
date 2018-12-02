@@ -7,7 +7,11 @@ import java.util.ArrayList;
 
 public class CSVReader {
 
-	// מקבלת קובץ ומחזירה מערך של סטרינגים עם השורות של הקובץ
+	/**
+	 * gets a csv file name and create a string array with the lines in the file
+	 * @param csvFile the name of the file
+	 * @return array with the lines in the file
+	 */
 	public  static String[] Reader(String csvFile){
 
 		String line = "";

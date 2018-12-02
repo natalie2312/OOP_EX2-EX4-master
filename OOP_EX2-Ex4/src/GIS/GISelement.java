@@ -10,6 +10,12 @@ public class GISelement implements GIS_element {
 	private Meta_data data;
 	private String name;
 	
+	/**
+	 * constructor to create a new element
+	 * @param geom
+	 * @param data
+	 * @param name
+	 */
 	public GISelement(Geom_element geom, Meta_data data, String name) {
 		this.geom= geom;
 		this.data= data;

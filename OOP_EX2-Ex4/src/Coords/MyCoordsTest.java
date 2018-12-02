@@ -47,7 +47,7 @@ class MyCoordsTest {
 
 	@Test
 	void testDistance3d() {
-		assertEquals(493.05233183241336, l.distance3d(a, b));
+		assertEquals(493.05233183241336, l.distance3d(a, b), 0.5);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ class MyCoordsTest {
 	void testAzimuth_elevation_dist() {
 		double[] ar= l.azimuth_elevation_dist(a, b);
 		double[] ar2= {313.2585, -2.3253, 493.0523};
-		assertArrayEquals(ar, ar2, 0.05);
+		assertArrayEquals(ar, ar2, 0.5);
 	}
 
 	@Test

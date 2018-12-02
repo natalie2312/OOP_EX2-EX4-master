@@ -5,7 +5,7 @@ import Geom.Point3D;
 
 public class GISlayer extends HashSet<GIS_element> implements GIS_layer {
 
-	HashSet<GIS_element> set = new HashSet<>();
+	HashSet<GIS_element> set = new HashSet<>();  // create a new set
 	private long creatTime;
 	
 	public GISlayer() {

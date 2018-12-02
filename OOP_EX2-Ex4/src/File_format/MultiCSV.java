@@ -24,19 +24,19 @@ public class MultiCSV {
 		File maindir = new File(name); 
 		ArrayList <File> csv_files= new ArrayList<File>();	
 		ArrayList<File> result = findCSVs(maindir, csv_files);
-		
+
 		GIS_project project= new GISproject();
-		
+
 		Iterator<File> it= result.iterator();	
-		
+
 		while(it.hasNext()) {
 			File file= it.next();
 			GIS_layer layer= cvs2layer.csv2layer(file.getPath());
 			project.add(layer);
 		}
-		
+
 		project2kml(project);
-		
+
 		return project;
 	}
 
@@ -60,7 +60,7 @@ public class MultiCSV {
 		}
 		return csv_files;
 	}
-	
+
 
 	public static boolean isRightFormat(File file) {
 		String line = "";
@@ -84,9 +84,9 @@ public class MultiCSV {
 		return false;
 	}
 
-	
+
 	public static void project2kml(GIS_project project) {
-		
+
 		PrintWriter pw = null;
 		try 
 		{
@@ -97,32 +97,32 @@ public class MultiCSV {
 			e.printStackTrace();
 			return;
 		}
-		
+
 		kml.startWrite(pw);
-		
+
 		Iterator<GIS_layer> it= project.iterator();	
 		while(it.hasNext()) {
 			GIS_layer layer= it.next();
-			
+
 			kml.addLayer(pw, layer,getRandomColor());
 		}
-		
+
 		kml.closeKml(pw);
 	}
-	
+
 	public static String getRandomColor() {
+		
 		int choise = new Random().nextInt(3); 
 		String color = "red";
-switch(choise) {
+		switch(choise) {
 		case 0 : color = "red";
 		break;
 		case 1 : color = "green";
 		break;
 		case 2 : color = "yellow";
 		break;
+		}
 		
-		
+		return color;
 	}
-return color;
-}
 }

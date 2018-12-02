@@ -9,7 +9,7 @@ public class test {
 
 //		Csv2kml.csv2kml("WigleWifi_20171203085618.csv");
 		
-		MultiCSV.dir2kml("D:\\color");
+		MultiCSV.dir2kml("C:\\Users\\Natalie\\Desktop\\n");
 		System.out.println("done");
 	}
 
