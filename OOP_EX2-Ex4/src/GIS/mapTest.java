@@ -40,7 +40,7 @@ class mapTest {
 		inPixel = new Point3D(645,478);
         inPixel1 = new Point3D(353,432);
 
-		this.map= new Map(this.myImage, gps1, gps2);
+		this.map= new Map(this.myImage);
 		
 	}
 

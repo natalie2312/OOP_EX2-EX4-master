@@ -34,11 +34,12 @@ import Geom.Point3D;
 
 public class MainWindow extends JFrame implements MouseListener
 {
-	public BufferedImage myImage;
+	public BufferedImage myImage ;
 	//	ArrayList<Point3D> pacman = new ArrayList<Point3D>();
 	//	ArrayList<Point3D> fruit = new ArrayList<Point3D>();
 	int choice = 0 ;
-	Game game;
+	Game game = new Game();
+	Map map;
 	
 
 	public MainWindow() 
@@ -126,12 +127,12 @@ repaint();
 
 		try {
 			myImage = ImageIO.read(new File("C:\\Users\\micha\\eclipse-workspace\\cont\\Ariel.jpg"));
+			map = new Map(myImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
 	}
-	
-	Map map = new map(myImage);//להגדיר שלא מקבל קאורדינאטות ולהזיז
+//	Map map = new Map(myImage);//להגדיר שלא מקבל קאורדינאטות ולהזיז
 
 
 	//	int x = -1;
@@ -156,9 +157,11 @@ repaint();
 			while(it.hasNext()) {
 				Packman p = it.next();
 				Point3D pp = p.getGps();
-				Point3D npp = map.coords2pics(pp);
-				int pX = (int)npp.x();
-				int pY = (int)npp.y();
+				int pX = (int)pp.x();
+				int pY = (int)pp.y();
+//				Point3D npp = map.coords2pics(pp);
+//				int pX = (int)npp.x();
+//				int pY = (int)npp.y();
 				g.setColor(pacman);
 				g.fillOval(pX,pY,rP,rP);
 			}
@@ -166,9 +169,11 @@ repaint();
 			while(it2.hasNext()) {
 				fruit f =it2.next();
 				Point3D pf = f.getGps();
-				Point3D npf = map.coords2pics(pf);
-				int fX = (int)npf.x();
-				int fY = (int)npf.y();
+				int fX = (int)pf.x();
+				int fY = (int)pf.y();
+//				Point3D npf = map.coords2pics(pf);
+//				int fX = (int)npf.x();
+//				int fY = (int)npf.y();
 				g.setColor(fruit);
 				g.fillOval(fX,fY,rF,rF);
 
@@ -195,8 +200,9 @@ repaint();
 		if(choice == 1) {
 
 			Point3D p = new Point3D(pointX,pointY,0);
-			Point3D p2c= map.pics2coords(p);
-			Packman pac = new Packman (p2c,1,1);
+			//Point3D p2c= map.pics2coords(p);
+//			Packman pac = new Packman (p2c,1,1);
+			Packman pac = new Packman (p,1,1);//מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
 			game.getPackmans().add(pac);
 
 
@@ -206,8 +212,9 @@ repaint();
 		if(choice == 2) {
 
 			Point3D p = new Point3D(pointX,pointY,0);
-			Point3D p2c= map.pics2coords(p);
-			fruit fr = new fruit (p2c,1);
+			//Point3D p2c= map.pics2coords(p);
+			fruit fr = new fruit (p,1);//מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
+			//fruit fr = new fruit (p2c,1);
 			game.getFruits().add(fr);
 
 			//fruit.add(new Point3D(pointX,pointY,0));	
