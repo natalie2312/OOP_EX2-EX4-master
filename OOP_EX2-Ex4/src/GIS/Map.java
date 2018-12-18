@@ -11,17 +11,15 @@ import Coords.MyCoords;
 public class Map {
 
 	private BufferedImage image;
-	private Point3D gps1;
-	private Point3D gps2;
+	private Point3D gps1= new Point3D(32.106046, 35.202574);
+	private Point3D gps2= new Point3D(32.101858, 35.212405);
 	private Point3D gps3;
 	private double high;
 	private double width;
 	private MyCoords myCoords;
 
-	public Map(BufferedImage myImage, Point3D gps1, Point3D gps2) {
+	public Map(BufferedImage myImage) {
 		this.image= myImage;
-		this.gps1= gps1;
-		this.gps2= gps2;
 		this.high= myImage.getHeight();
 		width= this.image.getWidth();
 		gps3= new Point3D(this.gps1.x(), this.gps2.y());

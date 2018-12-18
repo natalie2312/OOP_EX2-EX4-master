@@ -9,12 +9,16 @@ public class Packman {
 	private int radius;
     private int score = 0;
     private fruit closeFruit;
-    private double timeToFruit=0;
+    private double time=0;
+    private double timeToFruit;
+    private Path path;
 	
 	public Packman(Point3D gps, int speed, int radius) {
 		this.gps= gps;
 		this.speed= speed;
 		this.radius= radius;
+		Path path= new Path();
+		path.add(gps);
 	}
 
 	public Point3D getGps() {
@@ -45,20 +49,33 @@ public class Packman {
         score += scoreToAdd;
     }
 	
+    
     public fruit getCloseFruit() {
     	return this.closeFruit;
     }
     
-    public void setTimeToFruit(double t) {
-    	this.timeToFruit+= t;
+    public void setCloseFruit(fruit f) {
+    	this.closeFruit= f;
     }
     
-//    public void setCloseFruit(fruit f) {
-//    	this.closeFruit= f;
-//    }
-//    
-//    public void setCloseFruit(fruit f) {
-//    	this.closeFruit= f;
-//    }
-//	
+    public double getTime() {
+    	return this.time;       // זמן שהוא כבר עבר
+    }
+    
+    public void setTime(double t) {
+    	this.time+= t;       // זמן שהוא כבר עבר
+    }
+    
+    public double getTimeToFruit() {
+    	return this.timeToFruit;
+    }
+    
+    public void setTimeToFruit(double t) {
+    	this.timeToFruit= t;
+    }
+	
+    public Path getPath() {
+    	return this.path;
+    }
+    
 }
