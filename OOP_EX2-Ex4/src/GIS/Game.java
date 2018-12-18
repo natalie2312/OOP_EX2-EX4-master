@@ -156,5 +156,13 @@ public class Game extends HashSet<Object> {
 
         sb.append('\n');
 	}
+
+	public HashSet<fruit> getFruits() {
+		return fruits;
+	}
+
+	public HashSet<Packman> getPackmans() {
+		return Packmans;
+	}
 	
 }
