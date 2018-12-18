@@ -123,8 +123,6 @@ public class Game extends HashSet<Object> {
 	public void addPackman(StringBuilder sb, Packman p) {
         sb.append("P");
         sb.append(',');
-        sb.append(p.getId());
-        sb.append(',');
         sb.append(p.getGps().x());
         sb.append(',');
         sb.append(p.getGps().y());
@@ -141,8 +139,6 @@ public class Game extends HashSet<Object> {
 	
 	public void addFruit(StringBuilder sb, fruit f) {
         sb.append("F");
-        sb.append(',');
-        sb.append(f.getId());
         sb.append(',');
         sb.append(f.getGps().x());
         sb.append(',');
