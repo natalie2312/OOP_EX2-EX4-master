@@ -30,7 +30,6 @@ public class Game extends HashSet<Object> {
 				String[] Info = lines[i].split(",");
 
 				String type= Info[0];
-				int id= Integer.parseInt(Info[1]);
 				double lat = Double.parseDouble(Info[2]);
 				double lon = Double.parseDouble(Info[3]);
 				double alt = Double.parseDouble(Info[4]);
@@ -41,12 +40,12 @@ public class Game extends HashSet<Object> {
 
 				if(type.equals("P")) {
 					int raduis= Integer.parseInt(Info[6]);
-					Packman p= new Packman(id, gps, Speed_Weight, raduis);
+					Packman p= new Packman(gps, Speed_Weight, raduis);
 					Packmans.add(p);
 				}
 
 				else {
-					fruit f= new fruit(id, gps, Speed_Weight);
+					fruit f= new fruit(gps, Speed_Weight);
 					fruits.add(f);
 				}
 			}
