@@ -11,7 +11,7 @@ public class ShortestPathAlgo extends HashSet<Path> {
 	HashSet<Path> Paths = new HashSet<>();
 	
 	public ShortestPathAlgo(Game game) {
-		double time= 
+//		double time= 
 	}
 
 }
