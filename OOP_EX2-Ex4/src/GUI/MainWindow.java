@@ -37,6 +37,8 @@ import Geom.Point3D;
 public class MainWindow extends JFrame implements MouseListener
 {
 	public BufferedImage myImage ;
+	public BufferedImage fruitImage ;
+	public BufferedImage pacImage ;
 	int choice = 0 ;
 	Game game = new Game();
 	Map map;
@@ -69,6 +71,9 @@ public class MainWindow extends JFrame implements MouseListener
 		menu.add(item6);
 		this.setMenuBar(menuBar);
 
+		//listner for each menu item
+		
+		
 		item1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent listnerP) {
 				if (listnerP.getActionCommand().equals("Pacman")) {
@@ -140,6 +145,8 @@ public class MainWindow extends JFrame implements MouseListener
 
 		try {
 			myImage = ImageIO.read(new File("C:\\Users\\micha\\eclipse-workspace\\cont\\Ariel.jpg"));//creating image
+			fruitImage = ImageIO.read(new File("fruit.png"));
+			pacImage = ImageIO.read(new File("caricon12.gif_c200"));
 			map = new Map(myImage);
 		}
 		catch (IOException e) {
@@ -172,8 +179,10 @@ public class MainWindow extends JFrame implements MouseListener
 				System.out.println("to pix, x:"+npp.x()+", y:"+npp.y());
 				int pX = (int)npp.x();
 				int pY = (int)npp.y();
-				g.setColor(pacman);
-				g.fillOval(pX,pY,rP,rP);
+				g.drawImage(pacImage, pX, pY,40,40,this);
+
+//				g.setColor(pacman);
+//				g.fillOval(pX,pY,rP,rP);
 			}
 
 			while(it2.hasNext()) {
@@ -184,8 +193,9 @@ public class MainWindow extends JFrame implements MouseListener
 				Point3D npf = map.coords2pics(pf);
 				int fX = (int)npf.x();
 				int fY = (int)npf.y();
-				g.setColor(fruit);
-				g.fillOval(fX,fY,rF,rF);
+				g.drawImage(fruitImage, fX, fY,20,20,this);
+//				g.setColor(fruit);
+//				g.fillOval(fX,fY,rF,rF);
 
 			}
 		}
