@@ -184,14 +184,14 @@ public class MainWindow extends JFrame implements MouseListener
 			Point3D p = new Point3D(pointX,pointY,0);
 			//Point3D p2c= map.pics2coords(p);
 			//Packman pac = new Packman (p2c,1,1);
-			Packman pac = new Packman (p,1,1);//מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
+			Packman pac= new Packman(0,p,1,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
 			game.getPackmans().add(pac);
 		}
 
 		if(choice == 2) {
 			Point3D p = new Point3D(pointX,pointY,0);
 			//Point3D p2c= map.pics2coords(p);
-			fruit fr = new fruit (p,1);//מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
+			fruit fr= new fruit(0,p,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
 			//fruit fr = new fruit (p2c,1);
 			game.getFruits().add(fr);
 		}
