@@ -59,8 +59,10 @@ public class Map {
 	}
 	
 	public double azimut(Point3D p1, Point3D p2) {
+		Point3D point1= pics2coords(p1);
+        Point3D point2= pics2coords(p2);
         MyCoords myCoords = new MyCoords();
-		double azi= myCoords.azimuth_elevation_dist(p1,p2)[0];
+		double azi= myCoords.azimuth_elevation_dist(point1,point2)[0];
 		return azi;
 	}
 
