@@ -25,9 +25,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Algorithm.ShortestPathAlgo;
 import GIS.Game;
 import GIS.Map;
 import GIS.Packman;
+import GIS.Path;
 import GIS.fruit;
 import Geom.Point3D;
 
@@ -38,6 +40,7 @@ public class MainWindow extends JFrame implements MouseListener
 	int choice = 0 ;
 	Game game = new Game();
 	Map map;
+	ArrayList<Path> arr;
 
 	public MainWindow() 
 	{
@@ -85,9 +88,20 @@ public class MainWindow extends JFrame implements MouseListener
 		item3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent listnerPlay) {
 				if (listnerPlay.getActionCommand().equals("Play")) {
-					System.out.println("you chose play.");
 					choice = 3; 
+					System.out.println("you chose play.");
+
+					if(game.isEmpty())
+						System.out.println("cant play an empty game.");
+					else
+						{
+						ShortestPathAlgo a= new ShortestPathAlgo(game);
+						 arr= a.solution();
+						}
+					
+					
 				}
+				repaint();
 			}});
 
 		item4.addActionListener(new ActionListener() {
@@ -95,6 +109,8 @@ public class MainWindow extends JFrame implements MouseListener
 				if (listenClear.getActionCommand().equals("Clear")) {
 					System.out.println("you chose clear.");
 					choice = 4; //clears the array lists and the photo 
+					game.getFruits().clear();
+					game.getPackmans().clear();
 					repaint();
 				}
 			}});
@@ -105,7 +121,7 @@ public class MainWindow extends JFrame implements MouseListener
 				chooser.setFileFilter(new FileNameExtensionFilter("CSV file", "csv"));//filters the files that shown just to csv files
 				chooser.showOpenDialog(null);
 				File chosenFile = chooser.getSelectedFile();
-				Game game = new Game(chosenFile.getPath());
+				game = new Game(chosenFile.getPath());
 				choice = 5;
 				repaint();
 				//לשלוח את הכתובת של הפייל שקיבלנו למפה
@@ -123,7 +139,7 @@ public class MainWindow extends JFrame implements MouseListener
 			}});
 
 		try {
-			myImage = ImageIO.read(new File("C:\\Users\\Natalie\\eclipse-workspace\\OOP_EX2-EX4-master\\Ariel1.jpg"));
+			myImage = ImageIO.read(new File("C:\\Users\\micha\\eclipse-workspace\\cont\\Ariel.jpg"));
 			map = new Map(myImage);
 		}
 		catch (IOException e) {
@@ -141,9 +157,9 @@ public class MainWindow extends JFrame implements MouseListener
 
 		int rP= 30;
 		int rF = 20;
-		Color pacman = new Color(255, 255, 113); // Color white
+		Color pacman = new Color(255, 255, 113); // Color yellow
 		Color fruit = new Color(255, 102, 102); // red color for fruit
-
+		Color line = new Color(255, 255, 255); //color white
 		if(choice!=4) {
 			while(it.hasNext()) {
 				Packman p = it.next();
@@ -169,6 +185,19 @@ public class MainWindow extends JFrame implements MouseListener
 				g.fillOval(fX,fY,rF,rF);
 
 			}
+		}
+		
+		if(choice==3) {
+			Iterator<Path> it1= arr.iterator();
+			while(it1.hasNext()) {
+				Path path = it1.next();
+				for(int i=1; i<path.size();i++) {
+					Point3D sec = path.get(i);
+					Point3D first = path.get(i-1);
+					g.setColor(line);
+					g.drawLine((int)first.x(),(int) first.y(),(int) sec.x(), (int)sec.y());
+				}
+			}	
 		}
 	}
 
@@ -197,6 +226,10 @@ public class MainWindow extends JFrame implements MouseListener
 		}
 
 		if(choice == 3) {
+		
+			
+	
+			
 			// לקרוא לפונקציה שמחשבת את האלגורתים הקצר ביותר ומחזירה סט של מסלולים. צריך להבין איזה מסלול שייך לאיזה פקמן 
 		}
 

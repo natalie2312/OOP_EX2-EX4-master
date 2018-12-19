@@ -22,7 +22,10 @@ public class testCSV {
 		
 		Iterator<Path> it= arr.iterator();
 		while(it.hasNext()) {
-			
+			Path path = it.next();
+			for(int i=1; i<path.size();i++) {
+				
+			}
 			System.out.println(it.next().toString());
 		}
 		
