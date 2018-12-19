@@ -42,11 +42,6 @@ class MapTest {
 		
 	}
 
-//	@Test
-//	void testMap() {
-////		fail("Not yet implemented");
-//	}
-
 	@Test
 	void testCoords2pics() {
 
