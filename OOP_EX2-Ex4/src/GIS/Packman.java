@@ -4,6 +4,7 @@ import Geom.Point3D;
 
 public class Packman {
 
+	private int id;
 	private Point3D gps;
 	private int speed;
 	private int radius;
@@ -13,7 +14,8 @@ public class Packman {
     private double timeToFruit;
     private Path path;
 	
-	public Packman(Point3D gps, int speed, int radius) {
+	public Packman(int id, Point3D gps, int speed, int radius) {
+		this.id= id;
 		this.gps= gps;
 		this.speed= speed;
 		this.radius= radius;
@@ -21,6 +23,10 @@ public class Packman {
 		path.add(gps);
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	public Point3D getGps() {
 		return gps;
 	}

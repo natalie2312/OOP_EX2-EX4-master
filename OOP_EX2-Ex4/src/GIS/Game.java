@@ -30,6 +30,7 @@ public class Game extends HashSet<Object> {
 				String[] Info = lines[i].split(",");
 
 				String type= Info[0];
+				int id= Integer.parseInt(Info[1]);
 				double lat = Double.parseDouble(Info[2]);
 				double lon = Double.parseDouble(Info[3]);
 				double alt = Double.parseDouble(Info[4]);
@@ -40,12 +41,12 @@ public class Game extends HashSet<Object> {
 
 				if(type.equals("P")) {
 					int raduis= Integer.parseInt(Info[6]);
-					Packman p= new Packman(gps, Speed_Weight, raduis);
+					Packman p= new Packman(id, gps, Speed_Weight, raduis);
 					Packmans.add(p);
 				}
 
 				else {
-					fruit f= new fruit(gps, Speed_Weight);
+					fruit f= new fruit(id, gps, Speed_Weight);
 					fruits.add(f);
 				}
 			}
@@ -68,7 +69,6 @@ public class Game extends HashSet<Object> {
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
         StringBuilder sb = new StringBuilder();
         start(sb);
         addPackmanSet(sb);
@@ -81,6 +81,8 @@ public class Game extends HashSet<Object> {
 	
 	public void start(StringBuilder sb) {
 		sb.append("Type");
+        sb.append(",");
+		sb.append("id");
         sb.append(",");
         sb.append("Lat");
         sb.append(',');
@@ -121,6 +123,8 @@ public class Game extends HashSet<Object> {
 	public void addPackman(StringBuilder sb, Packman p) {
         sb.append("P");
         sb.append(',');
+        sb.append(p.getId());
+        sb.append(',');
         sb.append(p.getGps().x());
         sb.append(',');
         sb.append(p.getGps().y());
@@ -136,6 +140,8 @@ public class Game extends HashSet<Object> {
 	
 	public void addFruit(StringBuilder sb, fruit f) {
         sb.append("F");
+        sb.append(',');
+        sb.append(f.getId());
         sb.append(',');
         sb.append(f.getGps().x());
         sb.append(',');
