@@ -15,8 +15,8 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 	
 	public ShortestPathAlgo(Game game) {
 		
-		ArrayList<fruit> tempFruits = game.getFruits();
-		ArrayList<Packman> tempPackmans = game.getPackmans();
+		ArrayList<fruit> tempFruits = new ArrayList<fruit>(game.getFruits());
+		ArrayList<Packman> tempPackmans = new ArrayList<Packman>(game.getPackmans());
 		
 		while(!tempFruits.isEmpty()) {
 			
