@@ -85,7 +85,7 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 	}
 	
 	public void createLayer() {
-		GIS_layer layer= new GISlayer();
+		GIS_layer layer= new GISlayer();  // 
 		for(int i=0; i<max(); i++) {
 			
 		}
