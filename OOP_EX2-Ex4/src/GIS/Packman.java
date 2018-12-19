@@ -8,7 +8,7 @@ public class Packman {
 	private Point3D gps;
 	private int speed;
 	private int radius;
-    private int score = 0;
+    private double score = 0;
     private fruit closeFruit;
     private double time=0;
     private double timeToFruit;
@@ -54,6 +54,9 @@ public class Packman {
         score += scoreToAdd;
     }
 	
+	public void setScore(double d) {
+        this.score= d;
+    }
     
     public fruit getCloseFruit() {
     	return this.closeFruit;

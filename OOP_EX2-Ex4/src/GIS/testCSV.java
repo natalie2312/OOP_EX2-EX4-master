@@ -26,6 +26,14 @@ public class testCSV {
 			System.out.println(it.next().toString());
 		}
 		
+		System.out.println();
+		
+		Iterator<Packman> it2= game.getPackmans().iterator();
+		while(it2.hasNext()) {
+			System.out.println(it2.next().getScore());
+		}
+		
+		
 	}
 
 }

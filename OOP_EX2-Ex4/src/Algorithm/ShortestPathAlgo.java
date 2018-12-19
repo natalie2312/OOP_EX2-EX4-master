@@ -28,7 +28,7 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 			
 			while(temp_itP.hasNext())
 			{
-				Iterator<fruit> itF= game.getFruits().iterator();	
+				Iterator<fruit> itF= tempFruits.iterator();	
 				
 				Packman p= temp_itP.next();
 				double minTimeToFruit= 1000000000;
@@ -53,7 +53,16 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 			bestPac.setGps(bestPac.getCloseFruit().getGps());
 			bestPac.setTime(time);
 			bestPac.getPath().add(bestPac.getCloseFruit().getGps());
-			tempFruits.remove(bestPac.getCloseFruit());
+			int i= tempFruits.indexOf(bestPac.getCloseFruit());
+			tempFruits.remove(i);
+
+			bestPac.addScore(bestPac.getCloseFruit().getWeigth());
+			
+			System.out.println("deleted");
+			
+			System.out.println(bestPac.getPath().toString());
+			System.out.println();
+
 		}
 		
 		Iterator<Packman> temp= tempPackmans.iterator();
@@ -62,9 +71,19 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 			Paths.add(p.getPath());
 		}
 		
+		addScores(game, tempPackmans);
+		
 	}
 	
 	public ArrayList<Path> solution(){
 		return Paths;
+	}
+	
+	public void addScores(Game game, ArrayList<Packman> tempPackmans) {
+		
+		for(int i=0; i<tempPackmans.size(); i++) {
+			game.getPackmans().get(i).setScore(tempPackmans.get(i).getScore());
+			
+		}
 	}
 }
