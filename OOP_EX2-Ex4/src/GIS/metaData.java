@@ -5,9 +5,17 @@ import Geom.Point3D;
 public class metaData implements Meta_data  {
 
 	private long UTC;
+	private Point3D orientation= null;
+
 	
-	public metaData(long UTC) {
-		this.UTC= UTC;
+	public metaData() {
+		this.UTC = System.currentTimeMillis();
+
+	}
+	
+	public metaData(Point3D orientation) {
+		this.UTC= System.currentTimeMillis();
+		this.orientation= orientation;
 	}
 	
 	@Override
@@ -22,7 +30,7 @@ public class metaData implements Meta_data  {
 	
 	@Override
 	public Point3D get_Orientation() {
-		return null;
+		return orientation;
         }
 
 }

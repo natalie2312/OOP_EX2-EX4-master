@@ -33,6 +33,8 @@ public class text{
         Point3D expected2 = new Point3D(32.106046, 35.202574);
         Point3D actual2 = map.pics2coords(new Point3D(710,300));   
         System.out.println(expected2+" yit "+ actual2 );
+        Point3D oo= new Point3D(850,130);
+        System.out.println(map.pics2coords(oo)+ "nae point");
         Point3D p= map.pics2coords(actual2);
         Point3D p2= map.coords2pics(p);
         System.out.println(p2);

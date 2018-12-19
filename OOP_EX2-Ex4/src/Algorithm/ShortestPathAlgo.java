@@ -3,6 +3,10 @@ package Algorithm;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import GIS.GIS_layer;
+import GIS.GIS_project;
+import GIS.GISlayer;
+import GIS.GISproject;
 import GIS.Game;
 import GIS.Packman;
 import GIS.Path;
@@ -12,6 +16,7 @@ import Geom.Point3D;
 public class ShortestPathAlgo extends ArrayList<Path> {
 	
 	ArrayList<Path> Paths = new ArrayList<Path>();
+	GIS_project project= new GISproject();
 	
 	public ShortestPathAlgo(Game game) {
 		
@@ -57,12 +62,6 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 			tempFruits.remove(i);
 
 			bestPac.addScore(bestPac.getCloseFruit().getWeigth());
-			
-			System.out.println("deleted");
-			
-			System.out.println(bestPac.getPath().toString());
-			System.out.println();
-
 		}
 		
 		Iterator<Packman> temp= tempPackmans.iterator();
@@ -70,9 +69,7 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 			Packman p= temp.next();
 			Paths.add(p.getPath());
 		}
-		
 		addScores(game, tempPackmans);
-		
 	}
 	
 	public ArrayList<Path> solution(){
@@ -85,5 +82,23 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 			game.getPackmans().get(i).setScore(tempPackmans.get(i).getScore());
 			
 		}
+	}
+	
+	public void createLayer() {
+		GIS_layer layer= new GISlayer();
+		for(int i=0; i<max(); i++) {
+			
+		}
+		
+	}
+	
+	public int max() {
+		int max= Paths.get(0).size();
+		for(int i=1; i<Paths.size(); i++) {
+			int num= Paths.get(i).size();
+			if(num> max)
+				max= num;
+		}
+		return max;
 	}
 }
