@@ -1,13 +1,14 @@
 package GIS;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
 import Geom.Point3D;
 
-public class Path extends HashSet<Point3D> {
+public class Path extends ArrayList<Point3D> {
 
-	HashSet<Point3D> path = new HashSet<>();
+	ArrayList<Point3D> path = new ArrayList<Point3D>();
 	
 	public Path() {
 	}

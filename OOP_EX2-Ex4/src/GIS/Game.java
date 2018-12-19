@@ -3,16 +3,17 @@ package GIS;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
 import File_format.CSVReader;
 import Geom.Point3D;
 
-public class Game extends HashSet<Object> {
+public class Game extends ArrayList<Object> {
 
-	HashSet<fruit> fruits = new HashSet<>();
-	HashSet<Packman> Packmans = new HashSet<>();
+	ArrayList<fruit> fruits = new ArrayList<fruit>();
+	ArrayList<Packman> Packmans = new ArrayList<Packman>();
 
 	public Game(){
 	}
@@ -155,11 +156,11 @@ public class Game extends HashSet<Object> {
         sb.append('\n');
 	}
 
-	public HashSet<fruit> getFruits() {
+	public ArrayList<fruit> getFruits() {
 		return fruits;
 	}
 
-	public HashSet<Packman> getPackmans() {
+	public ArrayList<Packman> getPackmans() {
 		return Packmans;
 	}
 	

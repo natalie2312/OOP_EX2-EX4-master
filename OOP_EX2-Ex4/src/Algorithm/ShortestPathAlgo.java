@@ -1,60 +1,70 @@
 package Algorithm;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import GIS.Game;
 import GIS.Packman;
 import GIS.Path;
 import GIS.fruit;
+import Geom.Point3D;
 
-public class ShortestPathAlgo extends HashSet<Path> {
+public class ShortestPathAlgo extends ArrayList<Path> {
 	
-	HashSet<Path> Paths = new HashSet<>();
+	ArrayList<Path> Paths = new ArrayList<Path>();
 	
 	public ShortestPathAlgo(Game game) {
 		
-		HashSet<fruit> tempFruits = game.getFruits();
+		ArrayList<fruit> tempFruits = game.getFruits();
+		ArrayList<Packman> tempPackmans = game.getPackmans();
 		
 		while(!tempFruits.isEmpty()) {
 			
-			Iterator<Packman> itP= game.getPackmans().iterator();		
-			double min=100;
+			Iterator<Packman> itP= game.getPackmans().iterator();
+			Iterator<Packman> temp_itP= tempPackmans.iterator();
+
+			double min= 100000000;
 			Packman bestPac= itP.next();
 			
-			while(itP.hasNext())
+			while(temp_itP.hasNext())
 			{
 				Iterator<fruit> itF= game.getFruits().iterator();	
 				
-				Packman p= bestPac;
-				double minTimeToFruit= 100;
+				Packman p= temp_itP.next();
+				double minTimeToFruit= 1000000000;
 				
 				while(itF.hasNext()) {
 					fruit runner= itF.next();
 					double time= p.getGps().distance2D(runner.getGps())/p.getSpeed();
-					if(time< minTimeToFruit) {
+					if(time<= minTimeToFruit) {
 						minTimeToFruit= time;
 						p.setTimeToFruit(time);
 						p.setCloseFruit(runner);
 					}
 				}	
 				
-				if(p.getTimeToFruit()< min) {
+				if(p.getTimeToFruit()<= min) {
 					min= p.getTimeToFruit();
 					bestPac= p;
 				}
 			}
 			
-			fruit f= bestPac.getCloseFruit();
 			double time= bestPac.getTimeToFruit();
-			bestPac.setGps(f.getGps());
+			bestPac.setGps(bestPac.getCloseFruit().getGps());
 			bestPac.setTime(time);
-			bestPac.getPath().add(f.getGps());
+			bestPac.getPath().add(bestPac.getCloseFruit().getGps());
 			tempFruits.remove(bestPac.getCloseFruit());
-			
 		}
 		
+		Iterator<Packman> temp= tempPackmans.iterator();
+		while(temp.hasNext()) {
+			Packman p= temp.next();
+			Paths.add(p.getPath());
+		}
 		
 	}
-
+	
+	public ArrayList<Path> solution(){
+		return Paths;
+	}
 }
