@@ -59,11 +59,11 @@ public class Game extends HashSet<Object> {
 		return fileType.getName().endsWith(".csv");
 	}
 	
-	public void toCSV() {
+	public void toCSV(String name) {
 		
 		PrintWriter pw = null;
 		try {
-			pw = new PrintWriter(new File("test.csv"));
+			pw = new PrintWriter(new File(name+".csv"));
 		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -82,8 +82,6 @@ public class Game extends HashSet<Object> {
 	public void start(StringBuilder sb) {
 		sb.append("Type");
         sb.append(",");
-        sb.append("id");
-        sb.append(',');
         sb.append("Lat");
         sb.append(',');
         sb.append("Lon");
@@ -132,7 +130,6 @@ public class Game extends HashSet<Object> {
         sb.append(p.getSpeed());
         sb.append(',');
         sb.append(p.getRadius());
-        sb.append(',');
 
         sb.append('\n');
 	}
@@ -158,6 +155,10 @@ public class Game extends HashSet<Object> {
 
 	public HashSet<Packman> getPackmans() {
 		return Packmans;
+	}
+	
+	public boolean isEmpty() {
+		return fruits.isEmpty()&Packmans.isEmpty();
 	}
 	
 }
