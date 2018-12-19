@@ -30,7 +30,7 @@ public class Map {
 	public Point3D coords2pics(Point3D gps) {
 
 		double disX1= gps.x()-gps1.x();
-		double disX2= gps1.x()- gps2.x();
+		double disX2= gps2.x()- gps1.x();
 		double x= (disX1/disX2)*this.width;
 		
 		double disY1= gps.y()-gps1.y();
