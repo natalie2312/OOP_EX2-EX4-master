@@ -18,7 +18,7 @@ public class text{
 		
 		{
 		        try {
-		            String mapPath = "Ariel1.png";
+		            String mapPath = "Ariel1.jpg";
 		            myImage = ImageIO.read(new File(mapPath));
 		            
 		        } catch (IOException e) {
@@ -26,9 +26,13 @@ public class text{
 		        }	
 	}
 		Map map= new Map(myImage);
-		Point3D expected = new Point3D(708,432);
-        Point3D actual = map.coords2pics(new Point3D(32.104 , 35.210));   
-        System.out.println(expected+" yit"+ actual );
+		Point3D expected = new Point3D(0,0);
+        Point3D actual = map.coords2pics(new Point3D(32.106046, 35.202574));   
+        System.out.println(expected+" yit "+ actual );
+        
+        Point3D expected2 = new Point3D(32.106046, 35.202574);
+        Point3D actual2 = map.pics2coords(new Point3D(710,300));   
+        System.out.println(expected2+" yit "+ actual2 );
         
 	}
 }

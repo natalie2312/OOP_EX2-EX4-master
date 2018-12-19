@@ -21,7 +21,7 @@ public class Map {
 	public Map(BufferedImage myImage) {
 		this.image= myImage;
 		this.high= myImage.getHeight();
-		width= this.image.getWidth();
+		this.width= this.image.getWidth();
 		gps3= new Point3D(this.gps1.x(), this.gps2.y());
         myCoords = new MyCoords();
 
@@ -29,22 +29,26 @@ public class Map {
 
 	public Point3D coords2pics(Point3D gps) {
 
-		Point3D v= this.myCoords.vector3D(gps1, gps);
-		double disY = this.myCoords.distance3d( gps3,gps1);
-		System.out.println(disY);
-		double y= v.y()* this.image.getHeight()/disY;
-		double disX= this.myCoords.distance3d(gps3, gps2);
-		double x= v.x()* (this.image.getWidth()/ disX);
+		double disX1= gps.x()-gps1.x();
+		double disX2= gps1.x()- gps2.x();
+		double x= (disX1/disX2)*this.width;
+		
+		double disY1= gps.y()-gps1.y();
+		double disY2= gps2.y()- gps1.y();
+		double y= (disY1/disY2)*this.high;
 
 		return new Point3D(x,y);
 	}
 
 	public Point3D pics2coords(Point3D gps) {
 
-		double disY = this.myCoords.distance3d(gps1, gps3);
-		double y= gps.y()* (disY/this.high);
-		double disX= this.myCoords.distance3d(gps2, gps3);
-		double x= gps.x()* (this.width/disX);
+		double disX1= gps.x()/this.width;
+		double disX2= gps2.x()-gps1.x();
+		double x= disX1*disX2 +gps1.x();
+		
+		double disY1= gps.y()/this.high;
+		double disY2= gps2.y()-gps1.y();
+		double y= disY1*disY2 +gps1.y();
 
 		return new Point3D(x,y);
 	}
