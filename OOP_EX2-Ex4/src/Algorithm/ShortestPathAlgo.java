@@ -116,10 +116,18 @@ public class ShortestPathAlgo extends ArrayList<Path> {
             }
             if (i != 0) {
                 for (Path currnetPath : arr) {
-                    Point3D f = currnetPath.get(i - 1);
+                    Point3D f = currnetPath.get(i-1);
                     Geom_element geom_element = f;
-                    Point3D Ori = currnetPath.get(i);
-                    Meta_data data = new metaData(Ori);
+                    Point3D Ori;
+                    Meta_data data;
+                    if(currnetPath.size()<i) {
+                    	Ori = currnetPath.get(i);
+                        data = new metaData(Ori);
+                    }
+                    else {
+                    	Ori = null;
+                        data = new metaData();
+                    }
                     GIS_element gis_element = new GISelement(geom_element, data);
                     layer.add(gis_element);
                 }
