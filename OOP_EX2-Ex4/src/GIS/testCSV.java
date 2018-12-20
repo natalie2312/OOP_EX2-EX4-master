@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import Algorithm.ShortestPathAlgo;
 import File_format.MultiCSV;
+import File_format.Path2KML;
 
 public class testCSV {
 
@@ -19,6 +20,9 @@ public class testCSV {
 		Game game= new Game("game.csv");
 		ShortestPathAlgo a= new ShortestPathAlgo(game);
 		ArrayList<Path> arr= a.solution();
+
+		
+		Path2KML p= new Path2KML(a, arr, game);
 		
 		Iterator<Path> it= arr.iterator();
 		while(it.hasNext()) {

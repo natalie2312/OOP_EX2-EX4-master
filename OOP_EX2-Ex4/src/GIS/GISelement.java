@@ -22,6 +22,11 @@ public class GISelement implements GIS_element {
 		this.name= name;
 	}
 	
+	public GISelement(Geom_element geom, Meta_data data) {
+		this.geom= geom;
+		this.data= data;
+	}
+	
 	@Override
 	public Geom_element getGeom() {
 		return this.geom;

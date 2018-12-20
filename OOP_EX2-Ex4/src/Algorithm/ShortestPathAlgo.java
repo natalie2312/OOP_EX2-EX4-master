@@ -3,25 +3,31 @@ package Algorithm;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.GIS_project;
+import GIS.GISelement;
 import GIS.GISlayer;
 import GIS.GISproject;
 import GIS.Game;
+import GIS.Meta_data;
 import GIS.Packman;
 import GIS.Path;
 import GIS.fruit;
+import GIS.metaData;
+import Geom.Geom_element;
 import Geom.Point3D;
 
 public class ShortestPathAlgo extends ArrayList<Path> {
 	
-	ArrayList<Path> Paths = new ArrayList<Path>();
-	static GIS_project project= new GISproject();
+	static ArrayList<Path> Paths = new ArrayList<Path>();
+	ArrayList<fruit> tempFruits;
+	ArrayList<Packman> tempPackmans;
 	
 	public ShortestPathAlgo(Game game) {
 		
-		ArrayList<fruit> tempFruits = new ArrayList<fruit>(game.getFruits());
-		ArrayList<Packman> tempPackmans = new ArrayList<Packman>(game.getPackmans());
+		tempFruits = new ArrayList<fruit>(game.getFruits());
+		tempPackmans = new ArrayList<Packman>(game.getPackmans());
 		
 		while(!tempFruits.isEmpty()) {
 			
@@ -84,25 +90,54 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 		}
 	}
 	
-//	public void createLayer() {
-//		GIS_layer layer= new GISlayer();
-//		for(int i=0; i<max(); i++) {
-//			
-//		}
-//		
-//	}
+	public static GIS_project GetPathProject(ArrayList<Path> arr, Game g) {
+		
+        GIS_project Game_Porject = new GISproject();
+
+        for (int i = 0; i < max(arr); i++) {
+
+            GIS_layer layer = new GISlayer();
+
+            for (int j = 0; j < g.getFruits().size(); j++) {
+                fruit f = g.getFruits().get(j);
+                Geom_element Geom = f.getGps();
+                Meta_data GisData = new metaData();
+                GIS_element FruitEl = new GISelement(Geom, GisData);
+                layer.add(FruitEl);
+            }
+            if (i == 0) {
+                for (int j = 0; j < (g.getPackmans().size()); j++) {
+                    Packman p = g.getPackmans().get(j);
+                    Geom_element Geom = p.getGps();
+                    Meta_data GisData = new metaData(arr.get(i).get(0));
+                    GIS_element PacEl = new GISelement(Geom, GisData);
+                    layer.add(PacEl);
+                }
+            }
+            if (i != 0) {
+                for (Path currnetPath : arr) {
+                    Point3D f = currnetPath.get(i - 1);
+                    Geom_element geom_element = f;
+                    Point3D Ori = currnetPath.get(i);
+                    Meta_data data = new metaData(Ori);
+                    GIS_element gis_element = new GISelement(geom_element, data);
+                    layer.add(gis_element);
+                }
+            }
+            Game_Porject.add(layer);
+        }
+        return Game_Porject;
+    }
 	
-	public int max() {
-		int max= Paths.get(0).size();
-		for(int i=1; i<Paths.size(); i++) {
-			int num= Paths.get(i).size();
+	
+	public static int max(ArrayList<Path> arr) {
+		int max= arr.get(0).size();
+		for(int i=1; i<arr.size(); i++) {
+			int num= arr.get(i).size();
 			if(num> max)
 				max= num;
 		}
 		return max;
 	}
-	
-	public static GIS_project getProject(){
-		return project;
-	}
+
 }

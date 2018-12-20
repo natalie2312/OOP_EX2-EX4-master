@@ -107,7 +107,7 @@ public class MultiCSV {
 		PrintWriter pw = null;
 		try 
 		{
-			pw = new PrintWriter(new File("dir.kml"));
+			pw = new PrintWriter(new File("project.kml"));
 		} 
 		catch (FileNotFoundException e) 
 		{
@@ -120,7 +120,6 @@ public class MultiCSV {
 		Iterator<GIS_layer> it= project.iterator();//creates layers from each csv file	
 		while(it.hasNext()) {
 			GIS_layer layer= it.next();
-
 			kml.addLayer(pw, layer,getRandomColor()); //each layer sends to create KML file
 		}
 
