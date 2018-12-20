@@ -143,11 +143,10 @@ public class MainWindow extends JFrame implements MouseListener
 				}
 			}});
 
-		try {
+		try {//
 			myImage = ImageIO.read(new File("C:\\Users\\Natalie\\eclipse-workspace\\OOP_EX2-EX4-master\\Ariel1.jpg"));
 			fruitImage = ImageIO.read(new File("fruit.png"));
 			pacImage = ImageIO.read(new File("caricon12.gif_c200"));
-			map = new Map(myImage);
 			map = new Map(myImage);
 		}
 		catch (IOException e) {
