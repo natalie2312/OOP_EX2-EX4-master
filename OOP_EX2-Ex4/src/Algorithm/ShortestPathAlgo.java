@@ -16,7 +16,7 @@ import Geom.Point3D;
 public class ShortestPathAlgo extends ArrayList<Path> {
 	
 	ArrayList<Path> Paths = new ArrayList<Path>();
-	GIS_project project= new GISproject();
+	static GIS_project project= new GISproject();
 	
 	public ShortestPathAlgo(Game game) {
 		
@@ -84,13 +84,13 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 		}
 	}
 	
-	public void createLayer() {
-		GIS_layer layer= new GISlayer();  // 
-		for(int i=0; i<max(); i++) {
-			
-		}
-		
-	}
+//	public void createLayer() {
+//		GIS_layer layer= new GISlayer();
+//		for(int i=0; i<max(); i++) {
+//			
+//		}
+//		
+//	}
 	
 	public int max() {
 		int max= Paths.get(0).size();
@@ -100,5 +100,9 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 				max= num;
 		}
 		return max;
+	}
+	
+	public static GIS_project getProject(){
+		return project;
 	}
 }

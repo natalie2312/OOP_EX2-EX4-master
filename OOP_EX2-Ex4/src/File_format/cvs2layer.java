@@ -43,7 +43,7 @@ public class cvs2layer {
             LocalDateTime dateTime = LocalDateTime.parse(time, parseFormatter);
             long UTC = dateTime.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
             
-            Meta_data data = new metaData(UTC); // create the data 
+            Meta_data data = new metaData(); // create the data 
             
             GIS_element element = new GISelement(geom, data, name);   // create a new element
             Layer.add(element); // add to the layer
