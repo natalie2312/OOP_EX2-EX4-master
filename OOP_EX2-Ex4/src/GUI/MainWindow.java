@@ -37,6 +37,8 @@ import Geom.Point3D;
 public class MainWindow extends JFrame implements MouseListener
 {
 	public BufferedImage myImage ;
+	public BufferedImage fruitImage ;
+	public BufferedImage pacImage ;
 	int choice = 0 ;
 	Game game = new Game();
 	Map map;
@@ -69,6 +71,9 @@ public class MainWindow extends JFrame implements MouseListener
 		menu.add(item6);
 		this.setMenuBar(menuBar);
 
+		//listner for each menu item
+
+
 		item1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent listnerP) {
 				if (listnerP.getActionCommand().equals("Pacman")) {
@@ -94,12 +99,12 @@ public class MainWindow extends JFrame implements MouseListener
 					if(game.isEmpty())
 						System.out.println("cant play an empty game.");
 					else
-						{
+					{
 						ShortestPathAlgo a= new ShortestPathAlgo(game);
-						 arr= a.solution();
-						}
-					
-					
+						arr= a.solution();
+					}
+
+
 				}
 				repaint();
 			}});
@@ -127,7 +132,7 @@ public class MainWindow extends JFrame implements MouseListener
 				//לשלוח את הכתובת של הפייל שקיבלנו למפה
 			}
 		});
-		
+
 		item6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent saveGame) {
 				if (saveGame.getActionCommand().equals("save game")) {
@@ -140,6 +145,9 @@ public class MainWindow extends JFrame implements MouseListener
 
 		try {
 			myImage = ImageIO.read(new File("C:\\Users\\Natalie\\eclipse-workspace\\OOP_EX2-EX4-master\\Ariel1.jpg"));
+			fruitImage = ImageIO.read(new File("fruit.png"));
+			pacImage = ImageIO.read(new File("caricon12.gif_c200"));
+			map = new Map(myImage);
 			map = new Map(myImage);
 		}
 		catch (IOException e) {
@@ -160,40 +168,48 @@ public class MainWindow extends JFrame implements MouseListener
 		Color pacman = new Color(255, 255, 113); // Color yellow
 		Color fruit = new Color(255, 102, 102); // red color for fruit
 		Color line = new Color(255, 255, 255); //color white
+
+
 		if(choice!=4) {
 			while(it.hasNext()) {
 				Packman p = it.next();
 				Point3D pp = p.getGps();
-				int pX = (int)pp.x();
-				int pY = (int)pp.y();
-				//Point3D npp = map.coords2pics(pp);
-				//int pX = (int)npp.x();
-				//int pY = (int)npp.y();
-				g.setColor(pacman);
-				g.fillOval(pX,pY,rP,rP);
+				//				int pX = (int)pp.x();
+				//				int pY = (int)pp.y();
+				Point3D npp = map.coords2pics(pp);
+				System.out.println("to pix, x:"+npp.x()+", y:"+npp.y());
+				int pX = (int)npp.x();
+				int pY = (int)npp.y();
+				g.drawImage(pacImage, pX, pY,40,40,this);
+
+				//				g.setColor(pacman);
+				//				g.fillOval(pX,pY,rP,rP);
 			}
 
 			while(it2.hasNext()) {
 				fruit f =it2.next();
 				Point3D pf = f.getGps();
-				int fX = (int)pf.x();
-				int fY = (int)pf.y();
-				//Point3D npf = map.coords2pics(pf);
-				//int fX = (int)npf.x();
-				//int fY = (int)npf.y();
-				g.setColor(fruit);
-				g.fillOval(fX,fY,rF,rF);
+				//				int fX = (int)pf.x();
+				//				int fY = (int)pf.y();
+				Point3D npf = map.coords2pics(pf);
+				int fX = (int)npf.x();
+				int fY = (int)npf.y();
+				g.drawImage(fruitImage, fX, fY,20,20,this);
+				//				g.setColor(fruit);
+				//				g.fillOval(fX,fY,rF,rF);
 
 			}
 		}
-		
+
 		if(choice==3) {
 			Iterator<Path> it1= arr.iterator();
 			while(it1.hasNext()) {
 				Path path = it1.next();
 				for(int i=1; i<path.size();i++) {
 					Point3D sec = path.get(i);
+					sec= map.coords2pics(sec);
 					Point3D first = path.get(i-1);
+					first = map.coords2pics(first);
 					g.setColor(line);
 					g.drawLine((int)first.x(),(int) first.y(),(int) sec.x(), (int)sec.y());
 				}
@@ -208,30 +224,25 @@ public class MainWindow extends JFrame implements MouseListener
 
 		int pointX= arg.getX();
 		int pointY= arg.getY();
-		
+
 		if(choice == 1) {
 			Point3D p = new Point3D(pointX,pointY,0);
-			//Point3D p2c= map.pics2coords(p);
-			//Packman pac = new Packman (p2c,1,1);
-			Packman pac= new Packman(0,p,1,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
+			Point3D p2c= map.pics2coords(p);
+			System.out.println("to coord, x:"+p2c.x()+", y:"+p2c.y());
+			Packman pac = new Packman (1, p2c,1,1);
+			//Packman pac= new Packman(0,p,1,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
 			game.getPackmans().add(pac);
 		}
 
 		if(choice == 2) {
 			Point3D p = new Point3D(pointX,pointY,0);
-			//Point3D p2c= map.pics2coords(p);
-			fruit fr= new fruit(0,p,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
-			//fruit fr = new fruit (p2c,1);
+			Point3D p2c= map.pics2coords(p);
+			//fruit fr= new fruit(0,p,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
+			fruit fr = new fruit (1, p2c,1);
 			game.getFruits().add(fr);
 		}
 
-		if(choice == 3) {
-		
-			
-	
-			
-			// לקרוא לפונקציה שמחשבת את האלגורתים הקצר ביותר ומחזירה סט של מסלולים. צריך להבין איזה מסלול שייך לאיזה פקמן 
-		}
+
 
 		if(choice ==4) {
 			game.getFruits().clear();
