@@ -60,12 +60,15 @@ public class kml {
 		Point3D point = (Point3D)element.getGeom();
 
 		pw.println("<Placemark>");
-		pw.println("<name>"+ element.getName()+ "</name>");
+//		pw.println("<name>"+ element.getName()+ "</name>");
 
 		Date date = new Date(element.getData().getUTC());
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
 		pw.println("<description><![CDATA[Timestamp: <b>"+ element.getData().getUTC()+ "</b><br/>Date: <b>"+ df.format(date)+ "</b>]]></description>");
+		
+		pw.println("<TimeStamp><when>"+ df.format(date)+"</when></TimeStamp>");
+
 		pw.println("<styleUrl>#"+color+"</styleUrl>");
 		pw.println("<Point>");
 		pw.println("<coordinates>"+ point.y() +","+ point.x()+ ","+ point.z()+ "</coordinates>");
