@@ -60,6 +60,7 @@ public class MainWindow extends JFrame implements MouseListener
 		MenuItem item4 = new MenuItem("Clear");
 		MenuItem item5 = new MenuItem("Load file");
 		MenuItem item6 = new MenuItem("save game");
+		MenuItem item7 = new MenuItem("end game");
 
 
 		menuBar.add(menu);
@@ -139,14 +140,16 @@ public class MainWindow extends JFrame implements MouseListener
 					if(game.isEmpty())
 						System.out.println("cant save an empty game.");
 					else
-						game.toCSV("game");
+						game.toCSV("new game");
 				}
 			}});
-
-		try {//
-			myImage = ImageIO.read(new File("C:\\Users\\Natalie\\eclipse-workspace\\OOP_EX2-EX4-master\\Ariel1.jpg"));
-			fruitImage = ImageIO.read(new File("fruit.png"));
-			pacImage = ImageIO.read(new File("caricon12.gif_c200"));
+	
+		
+		
+		try {
+			myImage = ImageIO.read(new File("Ariel1.png"));
+			fruitImage = ImageIO.read(new File("cherry.png"));
+			pacImage = ImageIO.read(new File("pac.gif_c200"));
 			map = new Map(myImage);
 		}
 		catch (IOException e) {
@@ -176,13 +179,14 @@ public class MainWindow extends JFrame implements MouseListener
 				//				int pX = (int)pp.x();
 				//				int pY = (int)pp.y();
 				Point3D npp = map.coords2pics(pp);
+				System.out.println("to cor, x:"+pp.x()+", y:"+pp.y());
 				System.out.println("to pix, x:"+npp.x()+", y:"+npp.y());
 				int pX = (int)npp.x();
 				int pY = (int)npp.y();
 				g.drawImage(pacImage, pX, pY,40,40,this);
 
-				//				g.setColor(pacman);
-				//				g.fillOval(pX,pY,rP,rP);
+//								g.setColor(pacman);
+//								g.fillOval(pX,pY,rP,rP);
 			}
 
 			while(it2.hasNext()) {
@@ -191,11 +195,13 @@ public class MainWindow extends JFrame implements MouseListener
 				//				int fX = (int)pf.x();
 				//				int fY = (int)pf.y();
 				Point3D npf = map.coords2pics(pf);
+//				System.out.println("to cor, x:"+pf.x()+", y:"+pf.y());
+//				System.out.println("to pix, x:"+npf.x()+", y:"+npf.y());
 				int fX = (int)npf.x();
 				int fY = (int)npf.y();
-				g.drawImage(fruitImage, fX, fY,20,20,this);
-				//				g.setColor(fruit);
-				//				g.fillOval(fX,fY,rF,rF);
+				g.drawImage(fruitImage, fX, fY,30,30,this);
+//								g.setColor(fruit);
+//								g.fillOval(fX,fY,rF,rF);
 
 			}
 		}
@@ -223,6 +229,9 @@ public class MainWindow extends JFrame implements MouseListener
 
 		int pointX= arg.getX();
 		int pointY= arg.getY();
+		
+		System.out.println("("+ pointX + "," + pointY +")");
+
 
 		if(choice == 1) {
 			Point3D p = new Point3D(pointX,pointY,0);
