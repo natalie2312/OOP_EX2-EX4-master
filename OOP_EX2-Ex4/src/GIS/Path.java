@@ -9,8 +9,11 @@ import Geom.Point3D;
 public class Path extends ArrayList<Point3D> {
 
 	ArrayList<Point3D> path = new ArrayList<Point3D>();
+	double[] time = new double[path.size()];
+	int i=1;
 	
 	public Path() {
+    	time[0]= 0;
 	}
 
 	public double length() {
@@ -26,4 +29,13 @@ public class Path extends ArrayList<Point3D> {
 		}
 		return sum;
 	}
+	
+	   public double[] getTime() {
+	    	return this.time;       // זמן שהוא כבר עבר
+	    }
+	    
+	    public void addPointTime(double t) {
+	    	time[i++]= t;;       // זמן שהוא כבר עבר
+	    }
+	    
 }

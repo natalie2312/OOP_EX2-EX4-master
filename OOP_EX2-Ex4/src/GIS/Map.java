@@ -52,29 +52,29 @@ public class Map {
 
 	public Point3D pics2coords(Point3D gps) {
 
-		// double disY = gps.x() - gps1.x();
-		// System.out.println(disY);
-		// double disX = gps.y() - gps1.y();
-		// System.out.println(disX);
-		// double y = disY*unit;
-		// double x = disX*unit;
-		// System.out.println("Y: "+ disY);
-		// System.out.println("x: " +disX);
-		//
-
-		double disX = gps.x() / unitX;
-		double disY = gps.y() / unitY;
-		double x = gps1.x() - disX;
-		double y = disY + gps1.y();
+//		// double disY = gps.x() - gps1.x();
+//		// System.out.println(disY);
+//		// double disX = gps.y() - gps1.y();
+//		// System.out.println(disX);
+//		// double y = disY*unit;
+//		// double x = disX*unit;
+//		// System.out.println("Y: "+ disY);
+//		// System.out.println("x: " +disX);
+//		//
+//
+//		double disX = gps.x() / unitX;
+//		double disY = gps.y() / unitY;
+//		double x = gps1.x() - disX;
+//		double y = disY + gps1.y();
 
 		// נטלי
-		// double disX1= gps.x()/this.width;
-		// double disX2= gps2.x()-gps1.x();
-		// double x= disX1*disX2 +gps1.x();
-		//
-		// double disY1= gps.y()/this.high;
-		// double disY2= gps2.y()-gps1.y();
-		// double y= disY1*disY2 +gps1.y();
+		 double disX1= gps.x()/this.width;
+		 double disX2= gps2.x()-gps1.x();
+		 double x= disX1*disX2 +gps1.x();
+		
+		 double disY1= gps.y()/this.high;
+		 double disY2= gps2.y()-gps1.y();
+		 double y= disY1*disY2 +gps1.y();
 
 		return new Point3D(x, y);
 	}

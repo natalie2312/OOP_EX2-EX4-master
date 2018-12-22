@@ -64,6 +64,7 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 			bestPac.setGps(bestPac.getCloseFruit().getGps());
 			bestPac.setTime(time);
 			bestPac.getPath().add(bestPac.getCloseFruit().getGps());
+			bestPac.getPath().addPointTime(time);
 			int i= tempFruits.indexOf(bestPac.getCloseFruit());
 			tempFruits.remove(i);
 
