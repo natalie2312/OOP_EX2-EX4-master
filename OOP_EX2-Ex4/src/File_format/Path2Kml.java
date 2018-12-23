@@ -78,7 +78,7 @@ public class Path2Kml {
 				Point3D point = current.get(placemark);
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
-				Date date = new Date((long) (times[placemark] * 1000) + System.currentTimeMillis()+1000);
+				Date date = new Date((long) (times[placemark] * 1000) + System.currentTimeMillis());
 				writer.println("<Placemark>");
 				if (placemark==0) {
 					writer.println("<name>Pack["+(po++)+"]</name>");
