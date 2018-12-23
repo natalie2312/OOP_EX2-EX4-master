@@ -53,14 +53,14 @@ class mapTest {
 	void testCoords2pics() {
 
 		Point3D actualCoordinates = new Point3D(32.10809746113932,35.20590088832077);
-        Point3D actualPixel = map.coords2pics(actualCoordinates);
+        Point3D actualPixel = map.coords2pics(actualCoordinates,myImage.getHeight(),myImage.getWidth());
         Assert.assertTrue(inPixel1.close2equals(actualPixel,0.00001));
 	}
 
 	@Test
 	void testPics2coords() {
 		Point3D expected = new Point3D(32.10979442049724,35.206255140318355);
-        Point3D actual = map.pics2coords(inPixel);
+        Point3D actual = map.pics2coords(inPixel,myImage.getHeight(),myImage.getWidth());
         Assert.assertTrue(expected.close2equals(actual,0.00001));
 	}
 
@@ -75,8 +75,8 @@ class mapTest {
 	void testAzimut() {
 		double azimuthPix = map.azimut(inPixel1,inPixel);
         MyCoords myCoords = new MyCoords();
-        double azimuthGps = myCoords.azimuth_elevation_dist(map.pics2coords(inPixel1),
-                map.pics2coords(inPixel))[0];
+        double azimuthGps = myCoords.azimuth_elevation_dist(map.pics2coords(inPixel1,myImage.getHeight(),myImage.getWidth()),
+                map.pics2coords(inPixel,myImage.getHeight(),myImage.getWidth()))[0];
         Assert.assertEquals(azimuthGps,azimuthPix,0.0001);
 	}
 

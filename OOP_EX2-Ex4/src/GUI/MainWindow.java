@@ -190,7 +190,7 @@ public class MainWindow extends JFrame implements MouseListener
 				Point3D pp = p.getGps();
 				//				int pX = (int)pp.x();
 				//				int pY = (int)pp.y();
-				Point3D npp = map.coords2pics(pp);
+				Point3D npp = map.coords2pics(pp,this.getHeight(),this.getWidth());
 				System.out.println("to cor, x:"+pp.x()+", y:"+pp.y());
 				System.out.println("to pix, x:"+npp.x()+", y:"+npp.y());
 				int pX = (int)npp.x();
@@ -206,7 +206,7 @@ public class MainWindow extends JFrame implements MouseListener
 				Point3D pf = f.getGps();
 				//				int fX = (int)pf.x();
 				//				int fY = (int)pf.y();
-				Point3D npf = map.coords2pics(pf);
+				Point3D npf = map.coords2pics(pf,this.getHeight(),this.getWidth());
 //				System.out.println("to cor, x:"+pf.x()+", y:"+pf.y());
 //				System.out.println("to pix, x:"+npf.x()+", y:"+npf.y());
 				int fX = (int)npf.x();
@@ -224,9 +224,9 @@ public class MainWindow extends JFrame implements MouseListener
 				Path path = it1.next();
 				for(int i=1; i<path.size();i++) {
 					Point3D sec = path.get(i);
-					sec= map.coords2pics(sec);
+					sec= map.coords2pics(sec,this.getHeight(),this.getWidth());
 					Point3D first = path.get(i-1);
-					first = map.coords2pics(first);
+					first = map.coords2pics(first,this.getHeight(),this.getWidth());
 					g.setColor(line);
 					g.drawLine((int)first.x(),(int) first.y(),(int) sec.x(), (int)sec.y());
 				}
@@ -247,7 +247,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 		if(choice == 1) {
 			Point3D p = new Point3D(pointX,pointY,0);
-			Point3D p2c= map.pics2coords(p);
+			Point3D p2c= map.pics2coords(p,this.getHeight(),this.getWidth());
 			System.out.println("to coord, x:"+p2c.x()+", y:"+p2c.y());
 			Packman pac = new Packman (1, p2c,1,1);
 			//Packman pac= new Packman(0,p,1,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
@@ -256,7 +256,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 		if(choice == 2) {
 			Point3D p = new Point3D(pointX,pointY,0);
-			Point3D p2c= map.pics2coords(p);
+			Point3D p2c= map.pics2coords(p,this.getHeight(),this.getWidth());
 			//fruit fr= new fruit(0,p,1);   //מכניס למפה את הנקודה בפיקסלים ולא בקאורדינטות
 			fruit fr = new fruit (1, p2c,1);
 			game.getFruits().add(fr);

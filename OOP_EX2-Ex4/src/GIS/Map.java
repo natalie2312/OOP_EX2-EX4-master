@@ -20,13 +20,13 @@ public class Map {
 	private MyCoords myCoords;
 	private int pixWid = 1433;
 	private int pixhi = 642;
-//מקורי
-	private double unitX = pixWid / (Math.abs(gps2.y() - gps1.y()));
-	private double unitY = pixhi / (Math.abs(gps2.x() - gps1.x()));
+//קאורדינאטות לפיקסלים
+	private double unitX ; //= pixWid / (Math.abs(gps2.y() - gps1.y()));
+	private double unitY ;// = pixhi / (Math.abs(gps2.x() - gps1.x()));
 
-//dad
-	private double unitX1 = (Math.abs(gps2.y() - gps1.y())) / pixWid;
-	private double unitY1 = (Math.abs(gps2.x() - gps1.x())) / pixhi;
+//פיקסלים לקאורדניטאות
+	private double unitX1 ;//= (Math.abs(gps2.y() - gps1.y())) / pixWid;
+	private double unitY1 ;//= (Math.abs(gps2.x() - gps1.x())) / pixhi;
 	
 	
 //	private double unitX1 = (Math.abs(gps2.x() - gps1.x())) / pixWid;
@@ -47,8 +47,11 @@ public class Map {
 		System.out.println("unity" + unitY);
 	}
 
-	public Point3D coords2pics(Point3D gps) {
+	public Point3D coords2pics(Point3D gps, int height,int width ) {
 //original
+	 unitX = width / (Math.abs(gps2.y() - gps1.y()));
+	 unitY = height / (Math.abs(gps2.x() - gps1.x()));
+		
 		double disY = Math.abs(gps.x() - gps1.x());
 		double disX = Math.abs(gps.y() - gps1.y());
 		double x = disX * unitX;
@@ -67,13 +70,13 @@ public class Map {
 		return new Point3D(x,y);
 	}
 
-	public Point3D pics2coords(Point3D gps) {
+	public Point3D pics2coords(Point3D gps, int height,int width) {
 		
+		 unitX1 = (Math.abs(gps2.y() - gps1.y())) / width;
+		 unitY1 = (Math.abs(gps2.x() - gps1.x())) / height;
 		
 		double y= gps1.y() - gps.x()*unitX1;
-		
 		System.out.println("gps1: "+ gps1.x() +"gps.x*unitX = "+(gps.x()*unitX));
-		
 		double x= gps1.x() - gps.y()*unitY1;
 		System.out.println("x: " + x);
 		System.out.println("to coords , x: " +x + "to y: " + y);
@@ -105,8 +108,8 @@ public class Map {
 	}
 
 	public double azimut(Point3D p1, Point3D p2) {
-		Point3D point1 = pics2coords(p1);
-		Point3D point2 = pics2coords(p2);
+		Point3D point1 = pics2coords(p1,642,1433);
+		Point3D point2 = pics2coords(p2,642,1433);
 		MyCoords myCoords = new MyCoords();
 				
 		double azi = myCoords.azimuth_elevation_dist(point1, point2)[0];
