@@ -26,6 +26,7 @@ import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Algorithm.ShortestPathAlgo;
+import File_format.Path2Kml;
 import GIS.Game;
 import GIS.Map;
 import GIS.Packman;
@@ -43,6 +44,11 @@ public class MainWindow extends JFrame implements MouseListener
 	Game game = new Game();
 	Map map;
 	ArrayList<Path> arr;
+	ArrayList<Path> arr2;
+	double x ;
+	double y; 
+
+	boolean flag = false;
 
 	public MainWindow() 
 	{
@@ -50,11 +56,21 @@ public class MainWindow extends JFrame implements MouseListener
 		this.addMouseListener(this); 
 	}
 
+	private ArrayList<Path> copyArray(ArrayList a){
+		ArrayList<Path> arrM = new ArrayList<Path>();
+		for(int i=0; i<a.size(); i++) {
+			arrM.add((Path) a.get(i));
+		}
+
+		return arrM; 
+	}
+
 	private void initGUI() 
 	{
 		MenuBar menuBar = new MenuBar();
-		Menu menu = new Menu("game"); 
-		Menu menu1 = new Menu("creation"); 
+		Menu menu = new Menu("Game"); 
+		Menu menu1 = new Menu("Creation"); 
+		Menu menu2 = new Menu("Kml");
 		MenuItem item1 = new MenuItem("Pacman");
 		MenuItem item2 = new MenuItem("Fruit");
 		MenuItem item3 = new MenuItem("Play");
@@ -62,10 +78,14 @@ public class MainWindow extends JFrame implements MouseListener
 		MenuItem item5 = new MenuItem("Load file");
 		MenuItem item6 = new MenuItem("save game");
 		MenuItem item7 = new MenuItem("end game");
+		MenuItem item8 = new MenuItem("csv to kml");
 
 
 		menuBar.add(menu);
 		menuBar.add(menu1);
+		menuBar.add(menu2);
+
+
 		menu1.add(item1);
 		menu1.add(item2);
 		menu.add(item3);
@@ -73,6 +93,9 @@ public class MainWindow extends JFrame implements MouseListener
 		menu.add(item5);
 		menu.add(item6);
 		menu.add(item7);
+		menu2.add(item8);
+
+
 		this.setMenuBar(menuBar);
 
 		//listner for each menu item
@@ -105,11 +128,15 @@ public class MainWindow extends JFrame implements MouseListener
 					else
 					{
 						arr= new ShortestPathAlgo(game).getSolution();
-					}
+						
+						
 
+
+					}
+					repaint();
 
 				}
-				repaint();
+
 			}});
 
 		item4.addActionListener(new ActionListener() {
@@ -120,7 +147,8 @@ public class MainWindow extends JFrame implements MouseListener
 					game.getFruits().clear();
 					game.getPackmans().clear();
 					repaint();
-					arr.clear();
+					if(arr!=null)
+						arr.clear();
 				}
 			}});
 
@@ -133,7 +161,6 @@ public class MainWindow extends JFrame implements MouseListener
 				game = new Game(chosenFile.getPath());
 				choice = 5;
 				repaint();
-				//לשלוח את הכתובת של הפייל שקיבלנו למפה
 			}
 		});
 
@@ -143,21 +170,29 @@ public class MainWindow extends JFrame implements MouseListener
 					if(game.isEmpty())
 						System.out.println("cant save an empty game.");
 					else
-						game.toCSV("game");
+						game.toCSV("new game");
 				}
 			}});
-		
-		
-		
+
+
+
 		item7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent saveGame) {
 				if (saveGame.getActionCommand().equals("end game")) {
-				System.exit(0);
+					System.exit(0);
 				}
 			}});
-	
-		
-		
+
+		item8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent saveGame) {
+				if (saveGame.getActionCommand().equals("csv to kml")) {
+					Game game= new Game("new game.csv");
+					ArrayList<Path> a= new ShortestPathAlgo(game).getSolution();
+					Path2Kml p= new Path2Kml("kmlFile", a);
+					System.out.println("you have created a Kml file");
+				}
+			}});
+
 		try {
 			myImage = ImageIO.read(new File("Ariel1.png"));
 			fruitImage = ImageIO.read(new File("cherry.png"));
@@ -179,48 +214,39 @@ public class MainWindow extends JFrame implements MouseListener
 
 		int rP= 30;
 		int rF = 20;
-		Color pacman = new Color(255, 255, 113); // Color yellow
-		Color fruit = new Color(255, 102, 102); // red color for fruit
+
 		Color line = new Color(255, 255, 255); //color white
 
 
 		if(choice!=4) {
 			while(it.hasNext()) {
-				Packman p = it.next();
-				Point3D pp = p.getGps();
-				//				int pX = (int)pp.x();
-				//				int pY = (int)pp.y();
-				Point3D npp = map.coords2pics(pp,this.getHeight(),this.getWidth());
-				System.out.println("to cor, x:"+pp.x()+", y:"+pp.y());
-				System.out.println("to pix, x:"+npp.x()+", y:"+npp.y());
-				int pX = (int)npp.x();
-				int pY = (int)npp.y();
+				Packman pacman = it.next();
+				Point3D pacmanGPS = pacman.getGps();
+				Point3D pacmanPix= map.coords2pics(pacmanGPS,this.getHeight(),this.getWidth());
+				int pX = (int)pacmanPix.x();
+				int pY = (int)pacmanPix.y();
 				g.drawImage(pacImage, pX, pY,40,40,this);
 
-//								g.setColor(pacman);
-//								g.fillOval(pX,pY,rP,rP);
+
 			}
 
 			while(it2.hasNext()) {
-				fruit f =it2.next();
-				Point3D pf = f.getGps();
-				//				int fX = (int)pf.x();
-				//				int fY = (int)pf.y();
-				Point3D npf = map.coords2pics(pf,this.getHeight(),this.getWidth());
-//				System.out.println("to cor, x:"+pf.x()+", y:"+pf.y());
-//				System.out.println("to pix, x:"+npf.x()+", y:"+npf.y());
-				int fX = (int)npf.x();
-				int fY = (int)npf.y();
+				fruit fruit =it2.next();
+				Point3D fruitGPS = fruit.getGps();
+
+				Point3D fruitPIX = map.coords2pics(fruitGPS,this.getHeight(),this.getWidth());
+
+				int fX = (int)fruitPIX.x();
+				int fY = (int)fruitPIX.y();
 				g.drawImage(fruitImage, fX, fY,30,30,this);
-//								g.setColor(fruit);
-//								g.fillOval(fX,fY,rF,rF);
+
 
 			}
 		}
 
 		if(choice==3) {
 			Iterator<Path> it1= arr.iterator();
-			while(it1.hasNext()) {
+			while(it1.hasNext()) { //moves on all pathes. for each pacman there is a path. 
 				Path path = it1.next();
 				for(int i=1; i<path.size();i++) {
 					Point3D sec = path.get(i);
@@ -229,19 +255,26 @@ public class MainWindow extends JFrame implements MouseListener
 					first = map.coords2pics(first,this.getHeight(),this.getWidth());
 					g.setColor(line);
 					g.drawLine((int)first.x(),(int) first.y(),(int) sec.x(), (int)sec.y());
+
+
 				}
 			}	
 		}
+
+//		if(flag) {
+//			g.drawImage(pacImage, (int)x,(int) y,40,40,this);	
+//		}
+
+
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg) {
 		System.out.println("mouse Clicked");
-		System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 
 		int pointX= arg.getX();
 		int pointY= arg.getY();
-		
+
 		System.out.println("("+ pointX + "," + pointY +")");
 
 
@@ -264,10 +297,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 
-		if(choice ==4) {
-//			game.getFruits().clear();
-//			game.getPackmans().clear();
-		}
+
 
 		repaint();
 	}
@@ -296,4 +326,31 @@ public class MainWindow extends JFrame implements MouseListener
 
 	}
 
+
+//	public void paintPacman () {
+//		Iterator<Path> iter2= arr.iterator();
+//		while(iter2.hasNext()) { //moves on all pathes. for each pacman there is a path. 
+//			Path path =iter2.next();
+//			for(int i=1; i<path.size();i++) {
+//				Point3D sec = path.get(i);
+//				sec= map.coords2pics(sec,this.getHeight(),this.getWidth());
+//
+//				x= sec.x();
+//				y= sec.y();
+//
+//				revalidate();
+//				repaint();
+//
+//				try {
+//					Thread.sleep(1000);
+//
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//
+//			}
+//		}
+//	}
 }
