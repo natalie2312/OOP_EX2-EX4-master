@@ -53,7 +53,8 @@ public class MainWindow extends JFrame implements MouseListener
 	private void initGUI() 
 	{
 		MenuBar menuBar = new MenuBar();
-		Menu menu = new Menu("Menu"); 
+		Menu menu = new Menu("game"); 
+		Menu menu1 = new Menu("creation"); 
 		MenuItem item1 = new MenuItem("Pacman");
 		MenuItem item2 = new MenuItem("Fruit");
 		MenuItem item3 = new MenuItem("Play");
@@ -64,12 +65,14 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 		menuBar.add(menu);
-		menu.add(item1);
-		menu.add(item2);
+		menuBar.add(menu1);
+		menu1.add(item1);
+		menu1.add(item2);
 		menu.add(item3);
-		menu.add(item4);
+		menu1.add(item4);
 		menu.add(item5);
 		menu.add(item6);
+		menu.add(item7);
 		this.setMenuBar(menuBar);
 
 		//listner for each menu item
@@ -142,11 +145,20 @@ public class MainWindow extends JFrame implements MouseListener
 						game.toCSV("new game");
 				}
 			}});
+		
+		
+		
+		item7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent saveGame) {
+				if (saveGame.getActionCommand().equals("end game")) {
+				System.exit(0);
+				}
+			}});
 	
 		
 		
 		try {
-			myImage = ImageIO.read(new File("Ariel1.jpg"));
+			myImage = ImageIO.read(new File("Ariel1.png"));
 			fruitImage = ImageIO.read(new File("cherry.png"));
 			pacImage = ImageIO.read(new File("pac.gif_c200"));
 			map = new Map(myImage);
