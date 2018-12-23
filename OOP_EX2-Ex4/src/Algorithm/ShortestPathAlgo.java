@@ -26,7 +26,7 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 	
 	public ShortestPathAlgo(Game game) {
 		
-		tempFruits = (game.getFruits());
+		tempFruits = new ArrayList<fruit>(game.getFruits());
 		tempPackmans = new ArrayList<Packman>(game.getPackmans());
 		
 		while(!tempFruits.isEmpty()) {
@@ -46,7 +46,8 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 				
 				while(itF.hasNext()) {
 					fruit runner= itF.next();
-					double time= p.getGps().distance2D(runner.getGps())/p.getSpeed();
+					double time= p.getGps().distance2D(runner.getGps());
+					time= time/p.getSpeed();
 					if(time<= minTimeToFruit) {
 						minTimeToFruit= time;
 						p.setTimeToFruit(time);
@@ -82,11 +83,7 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 	public ArrayList<Path> getSolution(){
 		return Paths;
 	}
-	
-	public double[] PackmanEatingTimes(Path path) {
-		return path.getTime();
-	}
-	
+
 	public void addScores(Game game, ArrayList<Packman> tempPackmans) {
 		
 		for(int i=0; i<tempPackmans.size(); i++) {

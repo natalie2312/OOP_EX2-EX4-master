@@ -17,7 +17,7 @@ public class testCSV {
 //		game.toCSV("test");
 //		System.out.println("done");
 		
-		Game game= new Game("new game.csv");
+		Game game= new Game("game_1543684662657.csv");
 		//game.toCSV("jj");
 		ArrayList<Path> a= new ShortestPathAlgo(game).getSolution();
 

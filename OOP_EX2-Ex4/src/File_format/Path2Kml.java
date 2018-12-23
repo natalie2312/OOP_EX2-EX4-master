@@ -36,7 +36,7 @@ public class Path2Kml {
 		writer.println("<kml xmlns=\"http://www.opengis.net/kml/2.2\">");
 		writer.println("<Document>");
 		writer.println("<Folder>");
-		int i=0 ,j=0 , pacmanIndex = 0;
+		int i=0 ,j=1 , pacmanIndex = 0;
 		writer.println("<name>Paths</name>");
 
 		for (Path current : paths) {
@@ -74,11 +74,12 @@ public class Path2Kml {
 			writer.println("<name>Path["+(i++)+"]</name>");
 			String 	C2L =color.get(c++);
 			double[] times = current.getTime();
-			for(int placemark = 0; placemark < current.size();placemark++) {
+			for(int placemark = 0; placemark < current.size(); placemark++) {
 				Point3D point = current.get(placemark);
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
 				Date date = new Date((long) (times[placemark] * 1000) + System.currentTimeMillis());
+				System.out.println(times[placemark]);
 				writer.println("<Placemark>");
 				if (placemark==0) {
 					writer.println("<name>Pack["+(po++)+"]</name>");
@@ -94,16 +95,16 @@ public class Path2Kml {
 				writer.println("</Point>");
 				writer.println("<styleUrl>#"+C2L+"</styleUrl>");
 				writer.println("<TimeStamp>");
-				writer.println("<when>"+(df.format(date))+"</when>");
+				writer.println("<when>"+df.format(date).toString().replace(" ", "T")+"</when>");
 				writer.println("</TimeStamp>");
 				writer.println("</Placemark>");
 				
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					TimeUnit.SECONDS.sleep(1);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				}
 			writer.println("</Folder>");
 			}

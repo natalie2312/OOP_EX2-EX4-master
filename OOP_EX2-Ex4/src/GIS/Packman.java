@@ -21,7 +21,6 @@ public class Packman {
 		this.radius= radius;
 		path= new Path();
 		path.add(gps);
-		path.addPointTime(0);
 	}
 
 	public int getId() {
