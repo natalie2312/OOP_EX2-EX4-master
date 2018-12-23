@@ -120,6 +120,7 @@ public class MainWindow extends JFrame implements MouseListener
 					game.getFruits().clear();
 					game.getPackmans().clear();
 					repaint();
+					arr.clear();
 				}
 			}});
 
@@ -264,8 +265,8 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 		if(choice ==4) {
-			game.getFruits().clear();
-			game.getPackmans().clear();
+//			game.getFruits().clear();
+//			game.getPackmans().clear();
 		}
 
 		repaint();
