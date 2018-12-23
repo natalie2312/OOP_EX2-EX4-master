@@ -99,12 +99,12 @@ public class Path2Kml {
 				writer.println("</TimeStamp>");
 				writer.println("</Placemark>");
 				
-//				try {
-//					TimeUnit.SECONDS.sleep(1);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				}
 			writer.println("</Folder>");

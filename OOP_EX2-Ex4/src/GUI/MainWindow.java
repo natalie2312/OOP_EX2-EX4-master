@@ -143,7 +143,7 @@ public class MainWindow extends JFrame implements MouseListener
 					if(game.isEmpty())
 						System.out.println("cant save an empty game.");
 					else
-						game.toCSV("new game");
+						game.toCSV("game");
 				}
 			}});
 		

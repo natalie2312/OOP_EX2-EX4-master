@@ -11,7 +11,7 @@ public class testCSV {
 
 	public static void main(String[] args) {
 		
-		Game game= new Game("game_1543684662657.csv");
+		Game game= new Game("game.csv");
 		//game.toCSV("jj");
 		ArrayList<Path> a= new ShortestPathAlgo(game).getSolution();
 
