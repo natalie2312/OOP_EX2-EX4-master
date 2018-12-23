@@ -20,10 +20,7 @@ public class Path2Kml {
 	private Game kmlGame;
 	private ShortestPathAlgo solution = null;
 	
-	public Game getKmlGame() {
-		return kmlGame;
-	}
-	public void toKmlFile(String out ,ArrayList<Path> p, Game other){
+	public Path2Kml(String out ,ArrayList<Path> p, Game other){
 		kmlGame = new Game();
 		PrintWriter writer = null;
 		solution = new ShortestPathAlgo(kmlGame);
@@ -61,7 +58,7 @@ public class Path2Kml {
 			writer.println("<styleUrl>#getcolor</styleUrl>");
 			writer.println("<LineString>");
 			writer.println("<coordinates>");
-			for(Point3D point : current.getPointsCopy()) {
+			for(Point3D point : current.getPath()) {
 				writer.println(""+point.y()+","+point.x()+","+point.z());}
 			writer.println("</coordinates>");
 			writer.println("</LineString>");
@@ -75,9 +72,9 @@ public class Path2Kml {
 			writer.println("<Folder>");
 			writer.println("<name>Fruit["+(i++)+"]</name>");
 			String 	C2L =color.get(c++);
-			double[] times =  solution.PackmanEatingTimes(kmlGame.getPackmans().get(pacmanIndex), current);
+			double[] times = kmlGame.getPackmans().get(pacmanIndex).getPath().getTime();
 			for(int placemark = 0; placemark < current.size();placemark++) {
-				Point3D point = current.getPointsCopy().get(placemark);
+				Point3D point = current.getPath().get(placemark);
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 				Date date = new Date((long) (times[placemark] * 1000) + System.currentTimeMillis());
 				writer.println("<Placemark>");
@@ -148,4 +145,10 @@ public class Path2Kml {
 		}
 		return linkincolor;
 	}
+	
+	
+	public Game getKmlGame() {
+		return kmlGame;
+	}
+	
 }

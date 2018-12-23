@@ -9,18 +9,19 @@ import Geom.Point3D;
 public class Path extends ArrayList<Point3D> {
 
 	ArrayList<Point3D> path = new ArrayList<Point3D>();
+
 	double[] time = new double[path.size()];
 	int i=1;
-	
+
 	public Path() {
-    	time[0]= 0;
+		time[0]= 0;
 	}
 
 	public double length() {
 		double sum=0;
 		Iterator<Point3D> it= path.iterator();	
 		Point3D p= it.next(); 
-		
+
 		while(it.hasNext())   // while the layer has more elements
 		{
 			Point3D p2= it.next();
@@ -29,17 +30,21 @@ public class Path extends ArrayList<Point3D> {
 		}
 		return sum;
 	}
-	
-	   public double[] getTime() {
-	    	return this.time;       // זמן שהוא כבר עבר
-	    }
-	   
-	   public double getTimeToFruit(int index) {
-		   return time[index];
-	   }
-	    
-	    public void addPointTime(double t) {
-	    	time[i++]= t;;       // זמן שהוא כבר עבר
-	    }
-	    
+
+	public ArrayList<Point3D> getPath() {
+		return path;
+	}
+
+	public double[] getTime() {
+		return this.time;       // זמן שהוא כבר עבר
+	}
+
+	public double getTimeToFruit(int index) {
+		return time[index];
+	}
+
+	public void addPointTime(double t) {
+		time[i++]= t;;       // זמן שהוא כבר עבר
+	}
+
 }
