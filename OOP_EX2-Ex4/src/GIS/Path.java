@@ -33,6 +33,10 @@ public class Path extends ArrayList<Point3D> {
 	   public double[] getTime() {
 	    	return this.time;       // זמן שהוא כבר עבר
 	    }
+	   
+	   public double getTimeToFruit(int index) {
+		   return time[index];
+	   }
 	    
 	    public void addPointTime(double t) {
 	    	time[i++]= t;;       // זמן שהוא כבר עבר

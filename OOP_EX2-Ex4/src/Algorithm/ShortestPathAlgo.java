@@ -79,7 +79,7 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 		addScores(game, tempPackmans);
 	}
 	
-	public ArrayList<Path> solution(){
+	public ArrayList<Path> getSolution(){
 		return Paths;
 	}
 	
