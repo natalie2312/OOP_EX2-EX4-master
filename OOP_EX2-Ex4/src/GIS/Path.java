@@ -45,7 +45,8 @@ public class Path extends ArrayList<Point3D> {
 	}
 
 	public void addPointTime(double t) {
-		time[i++]= t;;       // זמן שהוא כבר עבר
+		time[i+1] = time[i]+ t; 
+		i++; // זמן שהוא כבר עבר
 	}
 
 }

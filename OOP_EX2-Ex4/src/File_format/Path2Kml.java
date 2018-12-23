@@ -77,8 +77,9 @@ public class Path2Kml {
 			for(int placemark = 0; placemark < current.size(); placemark++) {
 				Point3D point = current.get(placemark);
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-				Date date = new Date((long) (times[placemark] * 1000) + System.currentTimeMillis());
+				double sum =times[placemark];
+				Date date = new Date((long) (sum * 1000000) + System.currentTimeMillis());
+				System.out.println(date);
 				System.out.println(times[placemark]);
 				writer.println("<Placemark>");
 				if (placemark==0) {
@@ -94,18 +95,19 @@ public class Path2Kml {
 				writer.println("<coordinates>"+point.y() +","+point.x()+"</coordinates>");
 				writer.println("</Point>");
 				writer.println("<styleUrl>#"+C2L+"</styleUrl>");
+				if (placemark!=0) {
 				writer.println("<TimeStamp>");
 				writer.println("<when>"+df.format(date).toString().replace(" ", "T")+"</when>");
-				writer.println("</TimeStamp>");
+				writer.println("</TimeStamp>");}
 				writer.println("</Placemark>");
 				
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+//				try {
+//					TimeUnit.SECONDS.sleep(1);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
 				}
 			writer.println("</Folder>");
 			}
