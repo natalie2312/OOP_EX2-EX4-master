@@ -105,6 +105,7 @@ public class Path2Kml {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
+				
 				}
 			writer.println("</Folder>");
 			}

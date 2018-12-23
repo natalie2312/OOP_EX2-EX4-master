@@ -10,12 +10,6 @@ import File_format.Path2Kml;
 public class testCSV {
 
 	public static void main(String[] args) {
-
-//		Game game= new Game("game_1543684662657.csv");
-//		System.out.println("\ndone");
-//		
-//		game.toCSV("test");
-//		System.out.println("done");
 		
 		Game game= new Game("game_1543684662657.csv");
 		//game.toCSV("jj");
@@ -24,7 +18,7 @@ public class testCSV {
 		
 		
 		Path2Kml p= new Path2Kml("kmlFile", a);
-//		
+
 		Iterator<Path> it= a.iterator();
 		while(it.hasNext()) {
 			Path path = it.next();
