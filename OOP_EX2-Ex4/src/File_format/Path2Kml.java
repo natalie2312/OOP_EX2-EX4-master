@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import Algorithm.ShortestPathAlgo;
 import Coords.MyCoords;
@@ -17,13 +18,9 @@ import Geom.Point3D;
 
 public class Path2Kml {
 	
-	private Game kmlGame;
-	private ShortestPathAlgo solution = null;
-	
-	public Path2Kml(String out ,ArrayList<Path> p, Game other){
-		kmlGame = new Game();
+	public Path2Kml(String out ,ArrayList<Path> paths){
+		
 		PrintWriter writer = null;
-		solution = new ShortestPathAlgo(kmlGame);
 		
 		ArrayList<String> color= new ArrayList<>();
 		String [] tag = {"Red" , "Yellow", "Blue","Green","Purple","Orange", "Brown", "Pink"};
@@ -42,7 +39,7 @@ public class Path2Kml {
 		int i=0 ,j=0 , pacmanIndex = 0;
 		writer.println("<name>Paths</name>");
 
-		for (Path current : p) {
+		for (Path current : paths) {
 			writer.println("<name>Paths["+(i++)+"]</name>");
 			writer.println("<Folder>");
 			writer.println("<Style id=\"getcolor\">");
@@ -50,7 +47,7 @@ public class Path2Kml {
 			String s =get_color();
 			color.add(s);
 			writer.println("<color>"+s+"</color>");
-			writer.println("<width>3</width>");
+			writer.println("<width>4</width>");
 			writer.println( "</LineStyle>");
 			writer.println("</Style>");
 			writer.println("<Placemark>");
@@ -58,8 +55,12 @@ public class Path2Kml {
 			writer.println("<styleUrl>#getcolor</styleUrl>");
 			writer.println("<LineString>");
 			writer.println("<coordinates>");
-			for(Point3D point : current.getPath()) {
-				writer.println(""+point.y()+","+point.x()+","+point.z());}
+
+			for(int pl = 0; pl < current.size();pl++) {
+				Point3D point = current.get(pl);
+				writer.println(""+point.y()+","+point.x()+","+point.z());
+
+			}
 			writer.println("</coordinates>");
 			writer.println("</LineString>");
 			writer.println("</Placemark>");
@@ -67,26 +68,42 @@ public class Path2Kml {
 		}
 		i=0;
 		int c=0;
-		
-		for (Path current : solution.getSolution()) {
+		int po=1;
+		for (Path current : paths) {
 			writer.println("<Folder>");
-			writer.println("<name>Fruit["+(i++)+"]</name>");
+			writer.println("<name>Path["+(i++)+"]</name>");
 			String 	C2L =color.get(c++);
-			double[] times = kmlGame.getPackmans().get(pacmanIndex).getPath().getTime();
+			double[] times = current.getTime();
 			for(int placemark = 0; placemark < current.size();placemark++) {
-				Point3D point = current.getPath().get(placemark);
+				Point3D point = current.get(placemark);
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-				Date date = new Date((long) (times[placemark] * 1000) + System.currentTimeMillis());
+
+				Date date = new Date((long) (times[placemark] * 1000) + System.currentTimeMillis()+1000);
 				writer.println("<Placemark>");
-				writer.println("<name>Paths["+(j++)+"]</name>");
+				if (placemark==0) {
+					writer.println("<name>Pack["+(po++)+"]</name>");
+
+				}
+				else {
+				writer.println("<name>Fruit["+(j++)+"]</name>");
+				}
+				writer.println("<description><![CDATA[location: <b>"+point.y() +","+point.x()+"</b><br/>Date: <b>"+ df.format(date)+ "</b>]]></description>");
+
 				writer.println("<Point>");
 				writer.println("<coordinates>"+point.y() +","+point.x()+"</coordinates>");
 				writer.println("</Point>");
 				writer.println("<styleUrl>#"+C2L+"</styleUrl>");
 				writer.println("<TimeStamp>");
-				writer.println("<when>"+df.format(date).toString().replace(" ", "T")+"</when>");
+				writer.println("<when>"+(df.format(date))+"</when>");
 				writer.println("</TimeStamp>");
 				writer.println("</Placemark>");
+				
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				}
 			writer.println("</Folder>");
 			}
@@ -147,8 +164,6 @@ public class Path2Kml {
 	}
 	
 	
-	public Game getKmlGame() {
-		return kmlGame;
-	}
+
 	
 }

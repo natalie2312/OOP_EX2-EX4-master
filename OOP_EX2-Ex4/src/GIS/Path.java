@@ -8,13 +8,14 @@ import Geom.Point3D;
 
 public class Path extends ArrayList<Point3D> {
 
-	ArrayList<Point3D> path = new ArrayList<Point3D>();
+	ArrayList<Point3D> path;
 
-	double[] time = new double[path.size()];
-	int i=1;
+	double[] time;
+	int i=0;
 
 	public Path() {
-		time[0]= 0;
+		path = new ArrayList<Point3D>();
+		time = new double[100];
 	}
 
 	public double length() {

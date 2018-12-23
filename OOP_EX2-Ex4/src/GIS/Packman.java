@@ -12,14 +12,16 @@ public class Packman {
     private fruit closeFruit;
     private double time=0;
     private double timeToFruit;
-    private Path path= new Path();
+    private Path path;
 	
 	public Packman(int id, Point3D gps, int speed, int radius) {
 		this.id= id;
 		this.gps= gps;
 		this.speed= speed;
 		this.radius= radius;
+		path= new Path();
 		path.add(gps);
+		path.addPointTime(0);
 	}
 
 	public int getId() {

@@ -101,8 +101,7 @@ public class MainWindow extends JFrame implements MouseListener
 						System.out.println("cant play an empty game.");
 					else
 					{
-						ShortestPathAlgo a= new ShortestPathAlgo(game);
-						arr= a.solution();
+						arr= new ShortestPathAlgo(game).getSolution();
 					}
 
 
@@ -147,7 +146,7 @@ public class MainWindow extends JFrame implements MouseListener
 		
 		
 		try {
-			myImage = ImageIO.read(new File("Ariel1.png"));
+			myImage = ImageIO.read(new File("Ariel1.jpg"));
 			fruitImage = ImageIO.read(new File("cherry.png"));
 			pacImage = ImageIO.read(new File("pac.gif_c200"));
 			map = new Map(myImage);

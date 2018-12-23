@@ -83,6 +83,10 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 		return Paths;
 	}
 	
+	public double[] PackmanEatingTimes(Path path) {
+		return path.getTime();
+	}
+	
 	public void addScores(Game game, ArrayList<Packman> tempPackmans) {
 		
 		for(int i=0; i<tempPackmans.size(); i++) {
@@ -91,62 +95,62 @@ public class ShortestPathAlgo extends ArrayList<Path> {
 		}
 	}
 	
-	public static GIS_project GetPathProject(ArrayList<Path> arr, Game g) {
-		
-        GIS_project Game_Porject = new GISproject();
-
-        for (int i = 0; i < max(arr); i++) {
-
-            GIS_layer layer = new GISlayer();
-
-            for (int j = 0; j < g.getFruits().size(); j++) {
-                fruit f = g.getFruits().get(j);
-                Geom_element Geom = f.getGps();
-                Meta_data GisData = new metaData();
-                GIS_element FruitEl = new GISelement(Geom, GisData);
-                layer.add(FruitEl);
-            }
-            if (i == 0) {
-                for (int j = 0; j < (g.getPackmans().size()); j++) {
-                    Packman p = g.getPackmans().get(j);
-                    Geom_element Geom = p.getGps();
-                    Meta_data GisData = new metaData(arr.get(i).get(0));
-                    GIS_element PacEl = new GISelement(Geom, GisData);
-                    layer.add(PacEl);
-                }
-            }
-            if (i != 0) {
-                for (Path currnetPath : arr) {
-                    Point3D f = currnetPath.get(i-1);
-                    Geom_element geom_element = f;
-                    Point3D Ori;
-                    Meta_data data;
-                    if(currnetPath.size()<i) {
-                    	Ori = currnetPath.get(i);
-                        data = new metaData(Ori);
-                    }
-                    else {
-                    	Ori = null;
-                        data = new metaData();
-                    }
-                    GIS_element gis_element = new GISelement(geom_element, data);
-                    layer.add(gis_element);
-                }
-            }
-            Game_Porject.add(layer);
-        }
-        return Game_Porject;
-    }
-	
-	
-	public static int max(ArrayList<Path> arr) {
-		int max= arr.get(0).size();
-		for(int i=1; i<arr.size(); i++) {
-			int num= arr.get(i).size();
-			if(num> max)
-				max= num;
-		}
-		return max;
-	}
+//	public static GIS_project GetPathProject(ArrayList<Path> arr, Game g) {
+//		
+//        GIS_project Game_Porject = new GISproject();
+//
+//        for (int i = 0; i < max(arr); i++) {
+//
+//            GIS_layer layer = new GISlayer();
+//
+//            for (int j = 0; j < g.getFruits().size(); j++) {
+//                fruit f = g.getFruits().get(j);
+//                Geom_element Geom = f.getGps();
+//                Meta_data GisData = new metaData();
+//                GIS_element FruitEl = new GISelement(Geom, GisData);
+//                layer.add(FruitEl);
+//            }
+//            if (i == 0) {
+//                for (int j = 0; j < (g.getPackmans().size()); j++) {
+//                    Packman p = g.getPackmans().get(j);
+//                    Geom_element Geom = p.getGps();
+//                    Meta_data GisData = new metaData(arr.get(i).get(0));
+//                    GIS_element PacEl = new GISelement(Geom, GisData);
+//                    layer.add(PacEl);
+//                }
+//            }
+//            if (i != 0) {
+//                for (Path currnetPath : arr) {
+//                    Point3D f = currnetPath.get(i-1);
+//                    Geom_element geom_element = f;
+//                    Point3D Ori;
+//                    Meta_data data;
+//                    if(currnetPath.size()<i) {
+//                    	Ori = currnetPath.get(i);
+//                        data = new metaData(Ori);
+//                    }
+//                    else {
+//                    	Ori = null;
+//                        data = new metaData();
+//                    }
+//                    GIS_element gis_element = new GISelement(geom_element, data);
+//                    layer.add(gis_element);
+//                }
+//            }
+//            Game_Porject.add(layer);
+//        }
+//        return Game_Porject;
+//    }
+//	
+//	
+//	public static int max(ArrayList<Path> arr) {
+//		int max= arr.get(0).size();
+//		for(int i=1; i<arr.size(); i++) {
+//			int num= arr.get(i).size();
+//			if(num> max)
+//				max= num;
+//		}
+//		return max;
+//	}
 
 }
