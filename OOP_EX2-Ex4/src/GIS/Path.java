@@ -49,4 +49,9 @@ public class Path extends ArrayList<Point3D> {
 		i++; // זמן שהוא כבר עבר
 	}
 
+	public Point3D LestIndex() {
+		// TODO Auto-generated method stub
+		return path.get(path.size()-1);
+	}
+
 }

@@ -267,7 +267,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent arg) {
 		System.out.println("mouse Clicked");

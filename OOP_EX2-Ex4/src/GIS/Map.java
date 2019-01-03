@@ -47,6 +47,14 @@ public class Map {
 		System.out.println("unity" + unitY);
 	}
 
+	public Map(int height, int width2) {
+		// TODO Auto-generated constructor stub
+		this.high= height;
+		this.width= width2;
+		myCoords = new MyCoords();
+
+	}
+
 	public Point3D coords2pics(Point3D gps, int height,int width ) {
 //original
 	 unitX = width / (Math.abs(gps2.y() - gps1.y()));

@@ -86,5 +86,11 @@ public class Packman {
     public Path getPath() {
     	return this.path;
     }
+
+	public void setPath(Path path2) {
+		// TODO Auto-generated method stub
+		path= path2;
+		
+	}
     
 }
