@@ -8,6 +8,8 @@ Game usage:
 
 Creating your own game:
 The user can make his own game by creating the pacmans and fruits on the board by selecting the appropriate menu item.
+
+
 ![1](https://user-images.githubusercontent.com/44944939/50638350-25fe1480-0f66-11e9-8b8d-b738a737a14e.png)
 
  
@@ -18,10 +20,14 @@ by selecting “clear” – The game board will be completely deleted.
 
 Saving your own game: 
 In order to save your own game, you should choose the “game” option in the menu bar and then click on “save game”, you won’t be able to save an empty game (empty board). Your game will be saved as a new csv file, named “new game” with all the data of your pacmans and fruits.
+
+
  ![2](https://user-images.githubusercontent.com/44944939/50638425-5ba2fd80-0f66-11e9-94f0-f167d37057a6.png)
 
 
 Uploading a game: 
+
+
 ![3](https://user-images.githubusercontent.com/44944939/50638447-76757200-0f66-11e9-86ce-6eb9789803b2.png)
 
 By selecting “load file” - the user can choose a csv file with the data of the game.
